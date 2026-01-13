@@ -8,7 +8,7 @@
 
 Hello everyone!
 
-- In 2025 i have developed this custom program to support our Health & Safety department
+-  I have developed this custom program to support our Health & Safety department
 	Traditional charts and graphs proved ineffective, so we explored a more visually engaging approach
 
 - The solution was an interactive map, where users can click on individual items to view detailed information in a separate window
