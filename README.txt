@@ -9,7 +9,6 @@
 '    - www.facebook.com/Michael.Vessa.Uk
 '    - www.youtube.com/@Guy_vs_PC
 '    - www.github.com/vessartrk
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Hello everyone!
 
@@ -32,4 +31,5 @@ This was my first large-scale VBA project, and it took several months to complet
 You are welcome to use this program freely, even if it may not be directly useful due to its location-specific nature
 	
 If you have any questions, please feel free to contact me
+
 
