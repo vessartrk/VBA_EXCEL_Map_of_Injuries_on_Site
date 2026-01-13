@@ -1,0 +1,2879 @@
+Option Explicit
+
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' '           Created By Michael Vessa                ' ''' '' '
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Contact details
+'    - e-mail: vessartrk@gmail.com
+'    - phone: 07511 720 127
+'    - www.linkedin.com/in/michael-vessa-7ab357101
+'    - www.facebook.com/Michael.Vessa.Uk
+'    - www.youtube.com/@Guy_vs_PC
+'    - www.github.com/vessartrk
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Dim MainLoop As Long, f As Long, LastRow As Long, MainLoopCount As Long, LastRowInj As Long
+Dim BolLti As String, BolAid As String
+Dim TargCell As Long, xCol As Long, xRow As Long
+Dim DeptName As String, DeptBol As String
+Dim TopPos As Long, LeftPos As Long
+Dim DotShp As Shape
+Dim LastRowFilter As Long
+Dim Severity As String, FirstAid As String
+Dim InjuriesFilterbyYear As Boolean
+Dim InjuriesFilterByMonth As Boolean
+Dim Injuries_Count As Long
+'SubRoutine Variables
+Dim FacxLTICol As Integer, FacxLTIRow As Integer, FacxNonLTICol As Integer, FacxNonLTIRow As Integer
+Dim NarxLTICol As Integer, NarxLTIRow As Integer, NarxNonLTICol As Integer, NarxNonLTIRow As Integer
+Dim GooxLTICol As Integer, GooxLTIRow As Integer, GooxNonLTICol As Integer, GooxNonLTIRow As Integer
+Dim RetxLTICol As Integer, RetxLTIRow As Integer, RetxNonLTICol As Integer, RetxNonLTIRow As Integer
+Dim ArgxLTICol As Integer, ArgxLTIRow As Integer, ArgxNonLTICol As Integer, ArgxNonLTIRow As Integer
+Dim BunxLTICol As Integer, BunxLTIRow As Integer, BunxNonLTICol As Integer, BunxNonLTIRow As Integer
+Dim CorxLTICol As Integer, CorxLTIRow As Integer, CorxNonLTICol As Integer, CorxNonLTIRow As Integer
+Dim MobxLTICol As Integer, MobxLTIRow As Integer, MobxNonLTICol As Integer, MobxNonLTIRow As Integer
+Dim ResxLTICol As Integer, ResxLTIRow As Integer, ResxNonLTICol As Integer, ResxNonLTIRow As Integer
+Dim WidxLTICol As Integer, WidxLTIRow As Integer, WidxNonLTICol As Integer, WidxNonLTIRow As Integer
+Dim CubxLTICol As Integer, CubxLTIRow As Integer, CubxNonLTICol As Integer, CubxNonLTIRow As Integer
+Dim PicxLTICol As Integer, PicxLTIRow As Integer, PicxNonLTICol As Integer, PicxNonLTIRow As Integer
+Dim AmvxLTICol As Integer, AmvxLTIRow As Integer, AmvxNonLTICol As Integer, AmvxNonLTIRow As Integer
+Dim QAxLTICol As Integer, QAxLTIRow As Integer, QAxNonLTICol As Integer, QAxNonLTIRow As Integer
+Dim OffxLTICol As Integer, OffxLTIRow As Integer, OffxNonLTICol As Integer, OffxNonLTIRow As Integer
+Dim RefxLTICol As Integer, RefxLTIRow As Integer, RefxNonLTICol As Integer, RefxNonLTIRow As Integer
+Dim TvsxLTICol As Integer, TvsxLTIRow As Integer, TvsxNonLTICol As Integer, TvsxNonLTIRow As Integer
+Dim PalxLTICol As Integer, PalxLTIRow As Integer, PalxNonLTICol As Integer, PalxNonLTIRow As Integer
+Dim AmaxLTICol As Integer, AmaxLTIRow As Integer, AmaxNonLTICol As Integer, AmaxNonLTIRow As Integer
+Dim ManxLTICol As Integer, ManxLTIRow As Integer, ManxNonLTICol As Integer, ManxNonLTIRow As Integer
+Dim AllxLTICol As Integer, AllxLTIRow As Integer, AllxNonLTICol As Integer, AllxNonLTIRow As Integer
+Dim CarxLTICol As Integer, CarxLTIRow As Integer, CarxNonLTICol As Integer, CarxNonLTIRow As Integer
+Dim CanxLTICol As Integer, CanxLTIRow As Integer, CanxNonLTICol As Integer, CanxNonLTIRow As Integer
+Dim DhlxLTICol As Integer, DhlxLTIRow As Integer, DhlxNonLTICol As Integer, DhlxNonLTIRow As Integer
+Dim MhexLTICol As Integer, MhexLTIRow As Integer, MhexNonLTICol As Integer, MhexNonLTIRow As Integer
+Dim PlxLTICol As Integer, PlxLTIRow As Integer, PlxNonLTICol As Integer, PlxNonLTIRow As Integer
+Dim OutxLTICol As Integer, OutxLTIRow As Integer, OutxNonLTICol As Integer, OutxNonLTIRow As Integer
+Dim EndxLTICol As Integer, EndxLTIRow As Integer, EndxNonLTICol As Integer, EndxNonLTIRow As Integer
+Dim SerxLTICol As Integer, SerxLTIRow As Integer, SerxNonLTICol As Integer, SerxNonLTIRow As Integer
+Dim YarxLTICol As Integer, YarxLTIRow As Integer, YarxNonLTICol As Integer, YarxNonLTIRow As Integer
+Dim RecxLTICol As Integer, RecxLTIRow As Integer, RecxNonLTICol As Integer, RecxNonLTIRow As Integer
+Dim SecxLTICol As Integer, SecxLTIRow As Integer, SecxNonLTICol As Integer, SecxNonLTIRow As Integer
+Dim SidxLTICol As Integer, SidxLTIRow As Integer, SidxNonLTICol As Integer, SidxNonLTIRow As Integer
+Dim LocxLTICol As Integer, LocxLTIRow As Integer, LocxNonLTICol As Integer, LocxNonLTIRow As Integer
+
+Dim countRange As Range
+Dim Count As Integer
+Dim ws As Worksheet
+'Setting Value to False if exceed #
+'Dim FacAct As Boolean, NarAct As Boolean, GooAct As Boolean, RetAct As Boolean, ArgAct As Boolean, BunAct As Boolean, CorAct As Boolean, MobAct As Boolean, ResAct As Boolean, WidAct As Boolean
+'Dim CubAct As Boolean, PicAct As Boolean, AmvAct As Boolean, QAAct As Boolean, OffAct As Boolean, RefAct As Boolean, TvAct As Boolean, PalAct As Boolean, AmaAct As Boolean, ManAct As Boolean
+'Dim AllAct As Boolean, CarAct As Boolean, CanAct As Boolean, DhlAct As Boolean, MheAct As Boolean, PlAct As Boolean, OutAct As Boolean, EndAct As Boolean, SerAct As Boolean
+'Dim YarAct As Boolean, RecAct As Boolean, SecAct As Boolean, SidAct As Boolean, LocAct As Boolean
+
+'''''' Created by Michael Vessa 2025 ''''''''''''''''''''''''''''''''''''''''''
+'''''' This Mod serves to bring database-injuries sheet as and show it on the map ''''''''''''''''
+
+
+'''''''''' First Stage - Filter By Date ''''''''''''''''''''''''''''''''''''''''''
+
+' Filter by a date - Advanced Filter
+' FIlter by Month
+' Filter by year
+
+Sub FilterByMonth()
+
+Dim LastRowFM As Long
+Dim CalLoop As Long
+InjuriesFilterByMonth = True
+
+InjuriesFilterbyYear = False
+Application.ScreenUpdating = False
+
+With Sheet4
+    
+    .Range("AA5: AS999").Clear 'Clear all data in the database
+    LastRowFM = .Range("R99999").End(xlUp).Row 'Determine Last Row
+    
+    For CalLoop = 1 To LastRowFM
+   
+        .Range("C4:S" & LastRowFM).AdvancedFilter xlFilterCopy, CriteriaRange:=.Range("Y4:Z5"), CopyToRange:=.Range("AA4:AQ4"), Unique:=True
+    
+    Next CalLoop
+    
+End With
+
+Application.ScreenUpdating = True
+Call FilterByType
+End Sub
+
+Sub FilterByYear()
+
+InjuriesFilterbyYear = True
+Dim LastRowFY As Long
+Dim FilterByYearLoop As Long
+
+Application.ScreenUpdating = False
+
+With Sheet4
+
+    .Range("AA5: AS999").Clear 'Clear all data in the database
+    LastRowFY = .Range("R99999").End(xlUp).Row 'Determine Last Row
+    
+    For FilterByYearLoop = 1 To LastRowFY
+   
+        .Range("C4:S" & LastRowFY).AdvancedFilter xlFilterCopy, CriteriaRange:=.Range("Y7:Z8"), CopyToRange:=.Range("AA4:AQ4"), Unique:=True
+    
+    Next FilterByYearLoop
+End With
+
+Application.ScreenUpdating = True
+Call FilterByType
+End Sub
+
+Sub FilterByType()
+
+Dim FilterTypeLoop As Long
+
+Application.ScreenUpdating = False
+' Check for the Type of the injury and set its value next to the advanced filter''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+With Sheet4
+    
+    .Range("AR5:AS9999").Clear
+    LastRowFilter = .Range("AA9999").End(xlUp).Row
+    
+    If LastRowFilter < 5 Then
+        If InjuriesFilterbyYear = True Then
+            MsgBox "Nothing for selected year"
+            End
+    
+        ElseIf InjuriesFilterByMonth = True Then
+            MsgBox "Nothing for selected Month"
+            End
+        End If
+    End If
+    
+    For FilterTypeLoop = 5 To LastRowFilter
+        Severity = .Cells(FilterTypeLoop, 35).Value
+        FirstAid = .Cells(FilterTypeLoop, 34).Value
+        
+            If Severity = "LTI" Then
+                .Cells(FilterTypeLoop, 44).Value = True
+                .Cells(FilterTypeLoop, 45).Value = "Na"
+            Else
+                .Cells(FilterTypeLoop, 44).Value = False
+                If FirstAid = "Yes" Then
+                    .Cells(FilterTypeLoop, 45).Value = True
+                Else
+                    .Cells(FilterTypeLoop, 45).Value = False
+                End If
+            End If
+    Next FilterTypeLoop
+End With
+Call Injuries_Initialization
+End Sub
+Sub Injuries_Initialization()
+
+Call Delete_hidden_shapes
+
+' Reset Global variables and set execute command to True
+BolAid = 0
+BolLti = 0
+DeptBol = 0
+DeptName = 0
+f = 0
+FirstAid = 0
+LastRow = 0
+LastRowFilter = 0
+LeftPos = 0
+MainLoop = 0
+MainLoopCount = 0
+Severity = 0
+TargCell = 0
+TopPos = 0
+xCol = 0
+xRow = 0
+LastRowInj = 0
+
+' Reset Private Variables
+
+FacxLTICol = 0
+FacxLTIRow = 0
+FacxNonLTICol = 0
+FacxNonLTIRow = 0
+
+NarxLTICol = 0
+NarxLTIRow = 0
+NarxNonLTICol = 0
+NarxNonLTIRow = 0
+
+GooxLTICol = 0
+GooxLTIRow = 0
+GooxNonLTICol = 0
+GooxNonLTIRow = 0
+
+RetxLTICol = 0
+RetxLTIRow = 0
+RetxNonLTICol = 0
+RetxNonLTIRow = 0
+
+ArgxLTICol = 0
+ArgxLTIRow = 0
+ArgxNonLTICol = 0
+ArgxNonLTIRow = 0
+
+BunxLTICol = 0
+BunxLTIRow = 0
+BunxNonLTICol = 0
+BunxNonLTIRow = 0
+
+CorxLTICol = 0
+CorxLTIRow = 0
+CorxNonLTICol = 0
+CorxNonLTIRow = 0
+
+MobxLTICol = 0
+MobxLTIRow = 0
+MobxNonLTICol = 0
+MobxNonLTIRow = 0
+
+ResxLTICol = 0
+ResxLTIRow = 0
+ResxNonLTICol = 0
+ResxNonLTIRow = 0
+
+WidxLTICol = 0
+WidxLTIRow = 0
+WidxNonLTICol = 0
+WidxNonLTIRow = 0
+
+CubxLTICol = 0
+CubxLTIRow = 0
+CubxNonLTICol = 0
+CubxNonLTIRow = 0
+
+PicxLTICol = 0
+PicxLTIRow = 0
+PicxNonLTICol = 0
+PicxNonLTIRow = 0
+
+AmvxLTICol = 0
+AmvxLTIRow = 0
+AmvxNonLTICol = 0
+AmvxNonLTIRow = 0
+
+QAxLTICol = 0
+QAxLTIRow = 0
+QAxNonLTICol = 0
+QAxNonLTIRow = 0
+
+OffxLTICol = 0
+OffxLTIRow = 0
+OffxNonLTICol = 0
+OffxNonLTIRow = 0
+
+RefxLTICol = 0
+RefxLTIRow = 0
+RefxNonLTICol = 0
+RefxNonLTIRow = 0
+
+TvsxLTICol = 0
+TvsxLTIRow = 0
+TvsxNonLTICol = 0
+TvsxNonLTIRow = 0
+
+PalxLTICol = 0
+PalxLTIRow = 0
+PalxNonLTICol = 0
+PalxNonLTIRow = 0
+
+AmaxLTICol = 0
+AmaxLTIRow = 0
+AmaxNonLTICol = 0
+AmaxNonLTIRow = 0
+
+ManxLTICol = 0
+ManxLTIRow = 0
+ManxNonLTICol = 0
+ManxNonLTIRow = 0
+
+AllxLTICol = 0
+AllxLTIRow = 0
+AllxNonLTICol = 0
+AllxNonLTIRow = 0
+
+CarxLTICol = 0
+CarxLTIRow = 0
+CarxNonLTICol = 0
+CarxNonLTIRow = 0
+
+CanxLTICol = 0
+CanxLTIRow = 0
+CanxNonLTICol = 0
+CanxNonLTIRow = 0
+
+DhlxLTICol = 0
+DhlxLTIRow = 0
+DhlxNonLTICol = 0
+DhlxNonLTIRow = 0
+
+MhexLTICol = 0
+MhexLTIRow = 0
+MhexNonLTICol = 0
+MhexNonLTIRow = 0
+
+PlxLTICol = 0
+PlxLTIRow = 0
+PlxNonLTICol = 0
+PlxNonLTIRow = 0
+
+OutxLTICol = 0
+OutxLTIRow = 0
+OutxNonLTICol = 0
+OutxNonLTIRow = 0
+
+EndxLTICol = 0
+EndxLTIRow = 0
+EndxNonLTICol = 0
+EndxNonLTIRow = 0
+
+SerxLTICol = 0
+SerxLTIRow = 0
+SerxNonLTICol = 0
+SerxNonLTIRow = 0
+
+YarxLTICol = 0
+YarxLTIRow = 0
+YarxNonLTICol = 0
+YarxNonLTIRow = 0
+
+RecxLTICol = 0
+RecxLTIRow = 0
+RecxNonLTICol = 0
+RecxNonLTIRow = 0
+
+SecxLTICol = 0
+SecxLTIRow = 0
+SecxNonLTICol = 0
+SecxNonLTIRow = 0
+
+SidxLTICol = 0
+SidxLTIRow = 0
+SidxNonLTICol = 0
+SidxNonLTIRow = 0
+
+LocxLTICol = 0
+LocxLTIRow = 0
+LocxNonLTICol = 0
+LocxNonLTIRow = 0
+
+InjuriesFilterbyYear = False
+InjuriesFilterByMonth = False
+
+'Set ws = ThisWorkbook.Sheets("Sheet1")
+'Set countRange = ws.Range("AA5:AA999")
+'    ' Count non-empty cells
+'Count = Application.WorksheetFunction.CountA(countRange)
+'    ' Return the result
+'CountCellsWithValues = Count
+'Sheet1.Range("C17").Value = CountCellsWithValues
+'Dim DotShps As Shape
+''Clear all Objects (Dots)
+'With sh_Map
+'    For Each DotShps In .Shapes
+'        On Error Resume Next
+'        If InStr(DotShps.Name, "ShpInjury") > 0 Then DotShps.Delete 'deleting existed shapes assigned to an injury
+'        'If InStr(DotShps.Name, "ObservationShp") > 0 Then DotShps.Delete 'deleting existed shapes assigned to an observation
+'        On Error GoTo 0
+'    Next DotShps
+'End With
+'Application.ScreenUpdating = True
+
+'FacAct = True
+'NarAct = True
+'GooAct = True
+'RetAct = True
+'ArgAct = True
+'BunAct = True
+'CorAct = True
+'MobAct = True
+'RetAct = True
+'WidAct = True
+'CubAct = True
+'PicAct = True
+'AmvAct = True
+'QAAct = True
+'OffAct = True
+'RefAct = True
+'TvAct = True
+'PalAct = True
+'AmaAct = True
+'ManAct = True
+'AllAct = True
+'CarAct = True
+'CanAct = True
+'DhlAct = True
+'MheAct = True
+'PlAct = True
+'OutAct = True
+'EndAct = True
+'SerAct = True
+'YarAct = True
+'RecAct = True
+'SecAct = True
+'SidAct = True
+'LocAct = True
+
+Call Main_Loop
+End Sub
+Sub Main_Loop()
+
+'''''Checking on progress'''''''''''
+
+'Fac - Facilities
+'Nar - Narrow Aisle
+'Goo - Goods In
+'Ret - Returns 1st Floor
+'Arg - Argos
+'Bun - Bundles
+'Cor - Core
+'Mob - Mobile Floor
+'Res - Returns 2nd Floor
+'Wid - Wide Aisles
+'Cub - Cubiscan
+'Pic - Pick Tower
+'Amv - Amazon Vendorflex
+'QA - QA
+'Off - Offices
+'Ref - Reflex Pack benches
+'Tvs - TV Bulk Area
+'Pal - Pallnet
+'Ama - Amazon
+'Man - Managers Office
+'All - All Other Areas
+'Car - Car park
+'Can - Canteen
+'Dhl - DHL
+'Mhe - MHE Area
+'Pl - 3 PL
+'Out - Outbound
+'End - End Bays
+'Ser - Service Centre
+'Yar - Yard
+'Rec - Reception
+'Sec - Security Area
+'Sid - Side Racking
+'Loc - Lockers
+
+''''''''''''''''''''''''''''''''''''
+
+LastRowInj = Sheet4.Range("AA9999").End(xlUp).Row
+If LastRowInj < 5 Then
+    MsgBox "No data"
+    Exit Sub
+End If
+
+If MainLoopCount = 0 Then MainLoopCount = 5
+
+Injuries_Count = Sheet4.Range("AA9999").End(xlUp).Row - 4
+Sheet1.Range("C17").Value = Injuries_Count
+
+With Sheet4
+        
+    For MainLoop = MainLoopCount To LastRowInj
+        If MainLoopCount > LastRowInj Then GoTo Terminate_Injuries
+        DeptName = Sheet4.Cells(MainLoopCount, 30).Value
+        BolLti = Sheet4.Cells(MainLoopCount, 44).Value
+        BolAid = Sheet4.Cells(MainLoopCount, 45).Value
+
+        If DeptName = "Facilities" Then Call Execute_Facilities
+        If DeptName = "Narrow Aisle" Then Call Execute_Narrow_Aisle
+        If DeptName = "Goods In" Then Call Execute_Goods_In
+        If DeptName = "Returns 1st Floor" Then Call Execute_Returns_1st_Floor
+        If DeptName = "Argos" Then Call Execute_Argos
+        If DeptName = "Bundles" Then Call Execute_Bundles
+        If DeptName = "Core" Then Call Execute_Core
+        If DeptName = "Mobile Floor" Then Call Execute_Mobile_Floor
+        If DeptName = "Returns 2nd Floor" Then Call Execute_Returns_2nd_Floor
+        If DeptName = "Wide Aisles" Then Call Execute_Wide_Aisles
+        If DeptName = "Cubiscan" Then Call Execute_Cubiscan
+        If DeptName = "Pick Tower" Then Call Execute_Pick_Tower
+        If DeptName = "Amazon Vendorflex" Then Call Execute_Amazon_Vendorflex
+        If DeptName = "QA" Then Call Execute_QA
+        If DeptName = "Offices" Then Call Execute_Offices
+        If DeptName = "Reflex Pack Benches" Then Call Execute_Reflex_Pack_benches
+        If DeptName = "TV Bulk Area" Then Call Execute_TV_Bulk_Area
+        If DeptName = "Pallnet" Then Call Execute_Pallnet
+        If DeptName = "Amazon" Then Call Execute_Amazon
+        If DeptName = "Managers Office" Then Call Execute_Managers_Office
+        If DeptName = "All Other Areas" Then Call Execute_All_Other_Areas
+        If DeptName = "Car park" Then Call Execute_Car_park
+        If DeptName = "Canteen" Then Call Execute_Canteen
+        If DeptName = "DHL" Then Call Execute_DHL
+        If DeptName = "MHE Area" Then Call Execute_MHE_Area
+        If DeptName = "3PL" Then Call Execute_3_PL
+        If DeptName = "Outbound" Then Call Execute_Outbound
+        If DeptName = "End Bays" Then Call Execute_End_Bays
+        If DeptName = "Service Centre" Then Call Execute_Service_Centre
+        If DeptName = "Yard" Then Call Execute_Yard
+        If DeptName = "Reception" Then Call Execute_Reception
+        If DeptName = "Security Area" Then Call Execute_Security_Area
+        If DeptName = "Side Racking" Then Call Execute_Side_Racking
+        If DeptName = "Lockers" Then Call Execute_Lockers
+Next MainLoop
+
+Terminate_Injuries:
+DeptName = 0
+End With
+Exit Sub
+End Sub
+Private Sub Execute_Facilities()
+
+    If FacxLTICol = 126 Then
+        GoTo facLTIskip
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo facLTIskip
+    End If
+
+    If FacxLTICol = 0 Then
+        FacxLTICol = 116
+    End If
+    If FacxLTIRow = 0 Then
+        FacxLTIRow = 43
+    End If
+With sh_Map
+        'TargCell = .Cells(xRow, xCol)
+    TopPos = .Range(FacxLTIRow & ":" & FacxLTIRow).Top
+    LeftPos = .Cells(FacxLTIRow, FacxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    FacxLTICol = FacxLTICol + 2
+    If FacxLTICol = 126 Then
+        MsgBox "No More Space for Facilities LTI Injuries"
+    End If
+End With
+    GoTo FacExeEnd
+facLTIskip:
+' Assigning all NON-LTI values
+With sh_Map
+    If FacxNonLTIRow = 48 Then
+        GoTo FacExeEnd
+    End If
+    If FacxNonLTICol = 125 And FacxNonLTIRow = 47 Then  'AP is the Last Column
+        MsgBox "No More Space for Facilities NON-LTI Injuries"
+    End If
+    If FacxNonLTICol = 0 Then
+        FacxNonLTICol = 116
+    End If
+    If FacxNonLTIRow = 0 Then
+        FacxNonLTIRow = 45
+    End If
+    
+    TopPos = .Range(FacxNonLTIRow & ":" & FacxNonLTIRow).Top
+    LeftPos = .Cells(FacxNonLTIRow, FacxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    FacxNonLTICol = FacxNonLTICol + 1
+  
+    If FacxNonLTICol = 126 Then
+        FacxNonLTIRow = FacxNonLTIRow + 1
+        FacxNonLTICol = 116
+    End If
+End With
+FacExeEnd:
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+Private Sub Execute_Narrow_Aisle()
+
+'Dim NarxLTICol As Long, NarxLTIRow As Long, NarxNonLTICol As Long, NarxNonLTIRow As Long
+ If NarxLTICol >= 113 Then
+        GoTo NarLTIskip
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo NarLTIskip
+    End If
+
+    If NarxLTICol = 0 Then
+        NarxLTICol = 67
+    End If
+    If NarxLTIRow = 0 Then
+        NarxLTIRow = 28
+    End If
+With sh_Map
+        'TargCell = .Cells(xRow, xCol)
+    TopPos = .Range(NarxLTIRow & ":" & NarxLTIRow).Top
+    LeftPos = .Cells(NarxLTIRow, NarxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    NarxLTICol = NarxLTICol + 2
+    If NarxLTICol >= 113 Then
+        MsgBox "No More Space for Narrow Aisle LTI Injuries"
+    End If
+End With
+    GoTo NarExeEnd
+NarLTIskip:
+' Assigning all NON-LTI values
+With sh_Map
+    If NarxNonLTIRow = 34 Then
+        GoTo NarExeEnd
+    End If
+    If NarxNonLTICol = 114 And NarxNonLTIRow = 33 Then  'AP is the Last Column
+        MsgBox "No More Space for Narow Aisle NON-LTI Injuries"
+    End If
+    If NarxNonLTICol = 0 Then
+        NarxNonLTICol = 67
+    End If
+    If NarxNonLTIRow = 0 Then
+        NarxNonLTIRow = 30
+    End If
+    
+    TopPos = .Range(NarxNonLTIRow & ":" & NarxNonLTIRow).Top
+    LeftPos = .Cells(NarxNonLTIRow, NarxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    NarxNonLTICol = NarxNonLTICol + 1
+  
+    If NarxNonLTICol = 114 Then
+        NarxNonLTIRow = NarxNonLTIRow + 1
+        NarxNonLTICol = 67
+    End If
+End With
+NarExeEnd:
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Goods_In()
+'Dim GooxLTICol As Long, GooxLTIRow As Long, GooxNonLTICol As Long, GooxNonLTIRow As Long
+ If GooxLTICol >= 104 Then
+        GoTo GooLTIskip
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo GooLTIskip
+    End If
+
+    If GooxLTICol = 0 Then
+        GooxLTICol = 67
+    End If
+    If GooxLTIRow = 0 Then
+        GooxLTIRow = 70
+    End If
+With sh_Map
+    TopPos = .Range(GooxLTIRow & ":" & GooxLTIRow).Top
+    LeftPos = .Cells(GooxLTIRow, GooxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    GooxLTICol = GooxLTICol + 2
+    If GooxLTICol >= 104 Then
+        MsgBox "No More Space for Goods in LTI Injuries"
+    End If
+End With
+    GoTo GooExeEnd
+GooLTIskip:
+' Assigning all NON-LTI values
+With sh_Map
+    If GooxNonLTIRow = 74 Then
+        GoTo GooExeEnd
+    End If
+    If GooxNonLTICol >= 103 And GooxNonLTIRow >= 73 Then  'AP is the Last Column
+        MsgBox "No More Space for Goods in NON-LTI Injuries"
+    End If
+    If GooxNonLTICol = 0 Then
+        GooxNonLTICol = 67
+    End If
+    If GooxNonLTIRow = 0 Then
+        GooxNonLTIRow = 72
+    End If
+    
+    TopPos = .Range(GooxNonLTIRow & ":" & GooxNonLTIRow).Top
+    LeftPos = .Cells(GooxNonLTIRow, GooxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    GooxNonLTICol = GooxNonLTICol + 1
+  
+    If GooxNonLTICol = 103 Then
+        GooxNonLTIRow = GooxNonLTIRow + 1
+        GooxNonLTICol = 67
+    End If
+End With
+GooExeEnd:
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Returns_1st_Floor()
+'Dim RetxLTICol As Long, RetxLTIRow As Long, RetxNonLTICol As Long, RetxNonLTIRow As Long
+ If RetxLTICol >= 166 Then
+        GoTo RetLTIskip
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo RetLTIskip
+    End If
+
+    If RetxLTICol = 0 Then
+        RetxLTICol = 149
+    End If
+    If RetxLTIRow = 0 Then
+        RetxLTIRow = 20
+    End If
+With sh_Map
+    TopPos = .Range(RetxLTIRow & ":" & RetxLTIRow).Top
+    LeftPos = .Cells(RetxLTIRow, RetxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    RetxLTICol = RetxLTICol + 2
+    If RetxLTICol >= 166 Then
+        MsgBox "No More Space for Returns 1st Floor LTI Injuries"
+    End If
+End With
+    GoTo RetExeEnd
+RetLTIskip:
+' Assigning all NON-LTI values
+With sh_Map
+    If RetxNonLTIRow = 25 Then
+        GoTo RetExeEnd
+    End If
+    If RetxNonLTICol >= 166 And RetxNonLTIRow >= 24 Then  'AP is the Last Column
+        MsgBox "No More Space for Returns 1st Floor NON-LTI Injuries"
+    End If
+    If RetxNonLTICol = 0 Then
+        RetxNonLTICol = 149
+    End If
+    If RetxNonLTIRow = 0 Then
+        RetxNonLTIRow = 22
+    End If
+    
+    TopPos = .Range(RetxNonLTIRow & ":" & RetxNonLTIRow).Top
+    LeftPos = .Cells(RetxNonLTIRow, RetxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    RetxNonLTICol = RetxNonLTICol + 1
+  
+    If RetxNonLTICol = 166 Then
+        RetxNonLTIRow = RetxNonLTIRow + 1
+        RetxNonLTICol = 149
+    End If
+End With
+RetExeEnd:
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Argos()
+'Dim ArgxLTICol As Long, ArgxLTIRow As Long, ArgxNonLTICol As Long, ArgxNonLTIRow As Long
+ If ArgxLTICol >= 206 Then
+        GoTo ArgLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo ArgLTIskip 'Need to change
+    End If
+
+    If ArgxLTICol = 0 Then
+        ArgxLTICol = 183
+    End If
+    If ArgxLTIRow = 0 Then
+        ArgxLTIRow = 40
+    End If
+With sh_Map
+    TopPos = .Range(ArgxLTIRow & ":" & ArgxLTIRow).Top
+    LeftPos = .Cells(ArgxLTIRow, ArgxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    ArgxLTICol = ArgxLTICol + 2
+    If ArgxLTICol >= 206 Then
+        MsgBox "No More Space for Argos LTI Injuries"
+    End If
+End With
+    GoTo ArgExeEnd 'Need to change
+ArgLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If ArgxNonLTIRow = 46 Then
+        GoTo ArgExeEnd 'Need to change
+    End If
+    If ArgxNonLTICol >= 206 And ArgxNonLTIRow >= 45 Then  'AP is the Last Column
+        MsgBox "No More Space for Returns 1st Floor NON-LTI Injuries"
+    End If
+    If ArgxNonLTICol = 0 Then
+        ArgxNonLTICol = 183
+    End If
+    If ArgxNonLTIRow = 0 Then
+        ArgxNonLTIRow = 42
+    End If
+    
+    TopPos = .Range(ArgxNonLTIRow & ":" & ArgxNonLTIRow).Top
+    LeftPos = .Cells(ArgxNonLTIRow, ArgxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    ArgxNonLTICol = ArgxNonLTICol + 1
+  
+    If ArgxNonLTICol = 206 Then
+        ArgxNonLTIRow = ArgxNonLTIRow + 1
+        ArgxNonLTICol = 183
+    End If
+End With
+ArgExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Bundles()
+'Dim BunxLTICol As Long, BunxLTIRow As Long, BunxNonLTICol As Long, BunxNonLTIRow As Long
+ If BunxLTICol >= 146 Then
+        GoTo BunLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo BunLTIskip 'Need to change
+    End If
+
+    If BunxLTICol = 0 Then
+        BunxLTICol = 133
+    End If
+    If BunxLTIRow = 0 Then
+        BunxLTIRow = 40
+    End If
+With sh_Map
+    TopPos = .Range(BunxLTIRow & ":" & BunxLTIRow).Top
+    LeftPos = .Cells(BunxLTIRow, BunxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    BunxLTICol = BunxLTICol + 2
+    If BunxLTICol >= 146 Then
+        MsgBox "No More Space for Bundles LTI Injuries"
+    End If
+End With
+    GoTo BunExeEnd 'Need to change
+BunLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If BunxNonLTIRow = 46 Then
+        GoTo BunExeEnd 'Need to change
+    End If
+    If BunxNonLTICol >= 146 And BunxNonLTIRow >= 45 Then  'AP is the Last Column
+        MsgBox "No More Space for Bundles NON-LTI Injuries"
+        GoTo BunExeEnd 'Need to Change
+    End If
+    If BunxNonLTICol = 0 Then
+        BunxNonLTICol = 133
+    End If
+    If BunxNonLTIRow = 0 Then
+        BunxNonLTIRow = 42
+    End If
+    
+    TopPos = .Range(BunxNonLTIRow & ":" & BunxNonLTIRow).Top
+    LeftPos = .Cells(BunxNonLTIRow, BunxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    BunxNonLTICol = BunxNonLTICol + 1
+  
+    If BunxNonLTICol = 146 Then
+        BunxNonLTIRow = BunxNonLTIRow + 1
+        BunxNonLTICol = 133
+    End If
+End With
+BunExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Core()
+'Dim CorxLTICol As Long, CorxLTIRow As Long, CorxNonLTICol As Long, CorxNonLTIRow As Long
+ If CorxLTICol >= 44 Then
+        GoTo CorLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo CorLTIskip 'Need to change
+    End If
+
+    If CorxLTICol = 0 Then
+        CorxLTICol = 26
+    End If
+    If CorxLTIRow = 0 Then
+        CorxLTIRow = 28
+    End If
+With sh_Map
+    TopPos = .Range(CorxLTIRow & ":" & CorxLTIRow).Top
+    LeftPos = .Cells(CorxLTIRow, CorxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    CorxLTICol = CorxLTICol + 2
+    If CorxLTICol >= 44 Then
+        MsgBox "No More Space for Core LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo CorExeEnd 'Need to change
+CorLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If CorxNonLTIRow = 34 Then
+        GoTo CorExeEnd 'Need to change
+    End If
+    If CorxNonLTICol >= 43 And CorxNonLTIRow >= 43 Then  'AP is the Last Column
+        MsgBox "No More Space for Core NON-LTI Injuries" 'Need to Change
+        GoTo CorExeEnd 'Need to Change
+    End If
+    If CorxNonLTICol = 0 Then
+        CorxNonLTICol = 26
+    End If
+    If CorxNonLTIRow = 0 Then
+        CorxNonLTIRow = 30
+    End If
+    
+    TopPos = .Range(CorxNonLTIRow & ":" & CorxNonLTIRow).Top
+    LeftPos = .Cells(CorxNonLTIRow, CorxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    CorxNonLTICol = CorxNonLTICol + 1
+  
+    If CorxNonLTICol = 44 Then
+        CorxNonLTIRow = CorxNonLTIRow + 1
+        CorxNonLTICol = 26
+    End If
+End With
+CorExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Mobile_Floor()
+'Dim MobxLTICol As Long, MobxLTIRow As Long, MobxNonLTICol As Long, MobxNonLTIRow As Long
+ If MobxLTICol >= 198 Then
+        GoTo MobLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo MobLTIskip 'Need to change
+    End If
+
+    If MobxLTICol = 0 Then
+        MobxLTICol = 182
+    End If
+    If MobxLTIRow = 0 Then
+        MobxLTIRow = 23
+    End If
+With sh_Map
+    TopPos = .Range(MobxLTIRow & ":" & MobxLTIRow).Top
+    LeftPos = .Cells(MobxLTIRow, MobxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    MobxLTICol = MobxLTICol + 2
+    If MobxLTICol >= 198 Then
+        MsgBox "No More Space for Mobile Floor LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo MobExeEnd 'Need to change
+MobLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If MobxNonLTIRow = 28 Then
+        GoTo MobExeEnd 'Need to change
+    End If
+    If MobxNonLTICol >= 198 And MobxNonLTIRow >= 27 Then  'AP is the Last Column
+        MsgBox "No More Space for Mobiles Floor NON-LTI Injuries" 'Need to Change
+        GoTo MobExeEnd 'Need to Change
+    End If
+    If MobxNonLTICol = 0 Then
+        MobxNonLTICol = 182
+    End If
+    If MobxNonLTIRow = 0 Then
+        MobxNonLTIRow = 25
+    End If
+    TopPos = .Range(MobxNonLTIRow & ":" & MobxNonLTIRow).Top
+    LeftPos = .Cells(MobxNonLTIRow, MobxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    MobxNonLTICol = MobxNonLTICol + 1
+    If MobxNonLTICol = 198 Then
+        MobxNonLTIRow = MobxNonLTIRow + 1
+        MobxNonLTICol = 182
+    End If
+End With
+MobExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Returns_2nd_Floor()
+'Dim ResxLTICol As Long, ResxLTIRow As Long, ResxNonLTICol As Long, ResxNonLTIRow As Long
+ If ResxLTIRow >= 35 Then
+        GoTo ResLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo ResLTIskip 'Need to change
+    End If
+
+    If ResxLTICol = 0 Then
+        ResxLTICol = 129
+    End If
+    If ResxLTIRow = 0 Then
+        ResxLTIRow = 31
+    End If
+With sh_Map
+    TopPos = .Range(ResxLTIRow & ":" & ResxLTIRow).Top
+    LeftPos = .Cells(ResxLTIRow, ResxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    ResxLTICol = ResxLTICol + 2
+    If ResxLTICol >= 134 Then
+    ResxLTIRow = ResxLTIRow + 2
+    ResxLTICol = 129
+    End If
+        'MsgBox "No More Space for Returns 2nd Floor LTI Injuries" 'Need to Change
+End With
+    GoTo ResExeEnd 'Need to change
+ResLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If ResxNonLTIRow = 36 Then
+        GoTo ResExeEnd 'Need to change
+    End If
+    If ResxNonLTICol >= 146 And ResxNonLTIRow >= 35 Then  'AP is the Last Column
+        MsgBox "No More Space for Returns 2nd Floor NON-LTI Injuries" 'Need to Change
+        GoTo ResExeEnd 'Need to Change
+    End If
+    If ResxNonLTICol = 0 Then
+        ResxNonLTICol = 135
+    End If
+    If ResxNonLTIRow = 0 Then
+        ResxNonLTIRow = 31
+    End If
+    TopPos = .Range(ResxNonLTIRow & ":" & ResxNonLTIRow).Top
+    LeftPos = .Cells(ResxNonLTIRow, ResxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    ResxNonLTICol = ResxNonLTICol + 1
+    If ResxNonLTICol = 146 Then
+        ResxNonLTIRow = ResxNonLTIRow + 1
+        ResxNonLTICol = 135
+    End If
+End With
+ResExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Wide_Aisles()
+'Dim WidxLTICol As Long, WidxLTIRow As Long, WidxNonLTICol As Long, WidxNonLTIRow As Long
+ If WidxLTICol >= 41 Then
+        GoTo WidLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo WidLTIskip 'Need to change
+    End If
+
+    If WidxLTICol = 0 Then
+        WidxLTICol = 6
+    End If
+    If WidxLTIRow = 0 Then
+        WidxLTIRow = 7
+    End If
+With sh_Map
+    TopPos = .Range(WidxLTIRow & ":" & WidxLTIRow).Top
+    LeftPos = .Cells(WidxLTIRow, WidxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    WidxLTICol = WidxLTICol + 2
+    If WidxLTICol >= 41 Then
+        MsgBox "No More Space for Wide Aisle LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo WidExeEnd 'Need to change
+WidLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If WidxNonLTIRow = 14 Then
+        GoTo WidExeEnd 'Need to change
+    End If
+    If WidxNonLTICol >= 40 And WidxNonLTIRow >= 13 Then  'AP is the Last Column
+        MsgBox "No More Space for Wide Aisle NON-LTI Injuries" 'Need to Change
+        GoTo WidExeEnd 'Need to Change
+    End If
+    If WidxNonLTICol = 0 Then
+        WidxNonLTICol = 6
+    End If
+    If WidxNonLTIRow = 0 Then
+        WidxNonLTIRow = 9
+    End If
+    TopPos = .Range(WidxNonLTIRow & ":" & WidxNonLTIRow).Top
+    LeftPos = .Cells(WidxNonLTIRow, WidxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    WidxNonLTICol = WidxNonLTICol + 1
+  
+    If WidxNonLTICol = 41 Then
+        WidxNonLTIRow = WidxNonLTIRow + 1
+        WidxNonLTICol = 6
+    End If
+End With
+WidExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Cubiscan()
+'Dim CubxLTICol As Long, CubxLTIRow As Long, CubxNonLTICol As Long, CubxNonLTIRow As Long
+ If CubxLTICol >= 114 Then
+        GoTo CubLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo CubLTIskip 'Need to change
+    End If
+    
+    If CubxLTICol = 0 Then
+        CubxLTICol = 106
+    End If
+    If CubxLTIRow = 0 Then
+        CubxLTIRow = 70
+    End If
+With sh_Map
+    TopPos = .Range(CubxLTIRow & ":" & CubxLTIRow).Top
+    LeftPos = .Cells(CubxLTIRow, CubxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    CubxLTICol = CubxLTICol + 2
+    If CubxLTICol >= 114 Then
+        MsgBox "No More Space for Cubiscan Area LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo CubExeEnd 'Need to change
+CubLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If CubxNonLTIRow = 74 Then
+        GoTo CubExeEnd 'Need to change
+    End If
+    If CubxNonLTICol >= 114 And CubxNonLTIRow >= 73 Then  'AP is the Last Column
+        MsgBox "No More Space for Cubiscan Area NON-LTI Injuries" 'Need to Change
+        GoTo CubExeEnd 'Need to Change
+    End If
+    If CubxNonLTICol = 0 Then
+        CubxNonLTICol = 106
+    End If
+    If CubxNonLTIRow = 0 Then
+        CubxNonLTIRow = 72
+    End If
+    TopPos = .Range(CubxNonLTIRow & ":" & CubxNonLTIRow).Top
+    LeftPos = .Cells(CubxNonLTIRow, CubxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    CubxNonLTICol = CubxNonLTICol + 1
+  
+    If CubxNonLTICol = 114 Then
+        CubxNonLTIRow = CubxNonLTIRow + 1
+        CubxNonLTICol = 106
+    End If
+End With
+CubExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Pick_Tower()
+'Dim PicxLTICol As Long, PicxLTIRow As Long, PicxNonLTICol As Long, PicxNonLTIRow As Long
+ If PicxLTICol >= 64 And PicxLTIRow >= 32 Then
+        GoTo PicLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo PicLTIskip 'Need to change
+    End If
+    
+    If PicxLTICol = 0 Then
+        PicxLTICol = 46
+    End If
+    If PicxLTIRow = 0 Then
+        PicxLTIRow = 28
+    End If
+With sh_Map
+    TopPos = .Range(PicxLTIRow & ":" & PicxLTIRow).Top
+    LeftPos = .Cells(PicxLTIRow, PicxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    PicxLTICol = PicxLTICol + 2
+    If PicxLTICol >= 63 Then
+        PicxLTIRow = PicxLTIRow + 2
+        PicxLTICol = 46
+    End If
+End With
+    GoTo PicExeEnd 'Need to change
+PicLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If PicxNonLTIRow = 43 Then
+        GoTo PicExeEnd 'Need to change
+    End If
+    If PicxNonLTICol >= 64 And PicxNonLTIRow >= 42 Then  'AP is the Last Column
+        MsgBox "No More Space for Pick Tower NON-LTI Injuries" 'Need to Change
+        GoTo PicExeEnd 'Need to Change
+    End If
+    If PicxNonLTICol = 0 Then
+        PicxNonLTICol = 46
+    End If
+    If PicxNonLTIRow = 0 Then
+        PicxNonLTIRow = 32
+    End If
+    TopPos = .Range(PicxNonLTIRow & ":" & PicxNonLTIRow).Top
+    LeftPos = .Cells(PicxNonLTIRow, PicxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    PicxNonLTICol = PicxNonLTICol + 1
+  
+    If PicxNonLTICol = 65 Then
+        PicxNonLTIRow = PicxNonLTIRow + 1
+        PicxNonLTICol = 46
+    End If
+End With
+PicExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Amazon_Vendorflex()
+'Dim AmvxLTICol As Long, AmvxLTIRow As Long, AmvxNonLTICol As Long, AmvxNonLTIRow As Long
+ If AmvxLTICol >= 113 Then
+        GoTo AmvLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo AmvLTIskip 'Need to change
+    End If
+    
+    If AmvxLTICol = 0 Then
+        AmvxLTICol = 95
+    End If
+    If AmvxLTIRow = 0 Then
+        AmvxLTIRow = 7
+    End If
+With sh_Map
+    TopPos = .Range(AmvxLTIRow & ":" & AmvxLTIRow).Top
+    LeftPos = .Cells(AmvxLTIRow, AmvxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    AmvxLTICol = AmvxLTICol + 2
+    If AmvxLTICol >= 113 Then
+        MsgBox "No More Space for Amazon Vendorflex LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo AmvExeEnd 'Need to change
+AmvLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If AmvxNonLTIRow = 14 Then
+        GoTo AmvExeEnd 'Need to change
+    End If
+    If AmvxNonLTICol >= 114 And AmvxNonLTIRow >= 13 Then  'AP is the Last Column
+        MsgBox "No More Space for Amazon Vendorflex NON-LTI Injuries" 'Need to Change
+        GoTo AmvExeEnd 'Need to Change
+    End If
+    If AmvxNonLTICol = 0 Then
+        AmvxNonLTICol = 95
+    End If
+    If AmvxNonLTIRow = 0 Then
+        AmvxNonLTIRow = 9
+    End If
+    TopPos = .Range(AmvxNonLTIRow & ":" & AmvxNonLTIRow).Top
+    LeftPos = .Cells(AmvxNonLTIRow, AmvxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    AmvxNonLTICol = AmvxNonLTICol + 1
+  
+    If AmvxNonLTICol = 114 Then
+        AmvxNonLTIRow = AmvxNonLTIRow + 1
+        AmvxNonLTICol = 95
+    End If
+End With
+AmvExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_QA()
+'Dim QAxLTICol As Long, QAxLTIRow As Long, QAxNonLTICol As Long, QAxNonLTIRow As Long
+ If QAxLTICol >= 44 Then
+        GoTo QALTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo QALTIskip 'Need to change
+    End If
+
+    If QAxLTICol = 0 Then
+        QAxLTICol = 26
+    End If
+    If QAxLTIRow = 0 Then
+        QAxLTIRow = 45
+    End If
+With sh_Map
+    TopPos = .Range(QAxLTIRow & ":" & QAxLTIRow).Top
+    LeftPos = .Cells(QAxLTIRow, QAxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    QAxLTICol = QAxLTICol + 2
+    If QAxLTICol >= 44 Then
+        MsgBox "No More Space for QA LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo QAExeEnd 'Need to change
+QALTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If QAxNonLTIRow = 50 Then
+        GoTo QAExeEnd 'Need to change
+    End If
+    If QAxNonLTICol >= 43 And QAxNonLTIRow >= 50 Then  'AP is the Last Column
+        MsgBox "No More Space for QA NON-LTI Injuries" 'Need to Change
+        GoTo QAExeEnd 'Need to Change
+    End If
+    If QAxNonLTICol = 0 Then
+        QAxNonLTICol = 26
+    End If
+    If QAxNonLTIRow = 0 Then
+        QAxNonLTIRow = 47
+    End If
+    
+    TopPos = .Range(QAxNonLTIRow & ":" & QAxNonLTIRow).Top
+    LeftPos = .Cells(QAxNonLTIRow, QAxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    QAxNonLTICol = QAxNonLTICol + 1
+  
+    If QAxNonLTICol = 44 Then
+        QAxNonLTIRow = QAxNonLTIRow + 1
+        QAxNonLTICol = 26
+    End If
+End With
+QAExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Offices()
+'Dim OffxLTICol As Long, OffxLTIRow As Long, OffxNonLTICol As Long, OffxNonLTIRow As Long
+ If OffxLTICol >= 165 Then
+        GoTo OffLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo OffLTIskip 'Need to change
+    End If
+
+    If OffxLTICol = 0 Then
+        OffxLTICol = 146
+    End If
+    If OffxLTIRow = 0 Then
+        OffxLTIRow = 58
+    End If
+With sh_Map
+    TopPos = .Range(OffxLTIRow & ":" & OffxLTIRow).Top
+    LeftPos = .Cells(OffxLTIRow, OffxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    OffxLTICol = OffxLTICol + 2
+    If OffxLTICol >= 165 Then
+        MsgBox "No More Space for Offices LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo OffExeEnd 'Need to change
+OffLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If OffxNonLTIRow = 63 Then
+        GoTo OffExeEnd 'Need to change
+    End If
+    If OffxNonLTICol >= 165 And OffxNonLTIRow >= 62 Then  'AP is the Last Column
+        MsgBox "No More Space for Offices NON-LTI Injuries" 'Need to Change
+        GoTo OffExeEnd 'Need to Change
+    End If
+    If OffxNonLTICol = 0 Then
+        OffxNonLTICol = 146
+    End If
+    If OffxNonLTIRow = 0 Then
+        OffxNonLTIRow = 60
+    End If
+    
+    TopPos = .Range(OffxNonLTIRow & ":" & OffxNonLTIRow).Top
+    LeftPos = .Cells(OffxNonLTIRow, OffxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    OffxNonLTICol = OffxNonLTICol + 1
+  
+    If OffxNonLTICol = 165 Then
+        OffxNonLTIRow = OffxNonLTIRow + 1
+        OffxNonLTICol = 146
+    End If
+End With
+OffExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Reflex_Pack_benches()
+'Dim RefxLTICol As Long, RefxLTIRow As Long, RefxNonLTICol As Long, RefxNonLTIRow As Long
+ If RefxLTICol >= 44 Then
+        GoTo RefLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo RefLTIskip 'Need to change
+    End If
+
+    If RefxLTICol = 0 Then
+        RefxLTICol = 26
+    End If
+    If RefxLTIRow = 0 Then
+        RefxLTIRow = 57
+    End If
+With sh_Map
+    TopPos = .Range(RefxLTIRow & ":" & RefxLTIRow).Top
+    LeftPos = .Cells(RefxLTIRow, RefxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    RefxLTICol = RefxLTICol + 2
+    If RefxLTICol >= 44 Then
+        MsgBox "No More Space for Reflex Pack Benches LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo RefExeEnd 'Need to change
+RefLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If RefxNonLTIRow = 62 Then
+        GoTo RefExeEnd 'Need to change
+    End If
+    If RefxNonLTICol >= 43 And RefxNonLTIRow >= 62 Then  'AP is the Last Column
+        MsgBox "No More Space for Reflex Pack Benches NON-LTI Injuries" 'Need to Change
+        GoTo RefExeEnd 'Need to Change
+    End If
+    If RefxNonLTICol = 0 Then
+        RefxNonLTICol = 26
+    End If
+    If RefxNonLTIRow = 0 Then
+        RefxNonLTIRow = 59
+    End If
+    
+    TopPos = .Range(RefxNonLTIRow & ":" & RefxNonLTIRow).Top
+    LeftPos = .Cells(RefxNonLTIRow, RefxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    RefxNonLTICol = RefxNonLTICol + 1
+  
+    If RefxNonLTICol = 44 Then
+        RefxNonLTIRow = RefxNonLTIRow + 1
+        RefxNonLTICol = 26
+    End If
+End With
+RefExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_TV_Bulk_Area()
+'Dim TvsxLTICol As Long, TvsxLTIRow As Long, TvsxNonLTICol As Long, TvsxNonLTIRow As Long
+ If TvsxLTICol >= 92 Then
+        GoTo TvsLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo TvsLTIskip 'Need to change
+    End If
+
+    If TvsxLTICol = 0 Then
+        TvsxLTICol = 43
+    End If
+    If TvsxLTIRow = 0 Then
+        TvsxLTIRow = 7
+    End If
+With sh_Map
+    TopPos = .Range(TvsxLTIRow & ":" & TvsxLTIRow).Top
+    LeftPos = .Cells(TvsxLTIRow, TvsxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    TvsxLTICol = TvsxLTICol + 2
+    If TvsxLTICol >= 92 Then
+        MsgBox "No More Space for TV Bulk Area LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo TvsExeEnd 'Need to change
+TvsLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If TvsxNonLTIRow = 14 Then
+        GoTo TvsExeEnd 'Need to change
+    End If
+    If TvsxNonLTICol >= 92 And TvsxNonLTIRow >= 14 Then  'AP is the Last Column
+        MsgBox "No More Space for TV Bulk Area NON-LTI Injuries" 'Need to Change
+        GoTo TvsExeEnd 'Need to Change
+    End If
+    If TvsxNonLTICol = 0 Then
+        TvsxNonLTICol = 43
+    End If
+    If TvsxNonLTIRow = 0 Then
+        TvsxNonLTIRow = 9
+    End If
+    
+    TopPos = .Range(TvsxNonLTIRow & ":" & TvsxNonLTIRow).Top
+    LeftPos = .Cells(TvsxNonLTIRow, TvsxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    TvsxNonLTICol = TvsxNonLTICol + 1
+  
+    If TvsxNonLTICol = 93 Then
+        TvsxNonLTIRow = TvsxNonLTIRow + 1
+        TvsxNonLTICol = 43
+    End If
+End With
+TvsExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Pallnet()
+'Dim PalxLTICol As Long, PalxLTIRow As Long, PalxNonLTICol As Long, PalxNonLTIRow As Long
+ If PalxLTICol >= 23 Then
+        GoTo PalLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo PalLTIskip 'Need to change
+    End If
+
+    If PalxLTICol = 0 Then
+        PalxLTICol = 9
+    End If
+    If PalxLTIRow = 0 Then
+        PalxLTIRow = 57
+    End If
+With sh_Map
+    TopPos = .Range(PalxLTIRow & ":" & PalxLTIRow).Top
+    LeftPos = .Cells(PalxLTIRow, PalxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    PalxLTICol = PalxLTICol + 2
+    If PalxLTICol >= 22 Then
+        MsgBox "No More Space for Pallnet LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo PalExeEnd 'Need to change
+PalLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If PalxNonLTIRow = 62 Then
+        GoTo PalExeEnd 'Need to change
+    End If
+    If PalxNonLTICol >= 24 And PalxNonLTIRow >= 61 Then  'AP is the Last Column
+        MsgBox "No More Space for Pallnet NON-LTI Injuries" 'Need to Change
+        GoTo PalExeEnd 'Need to Change
+    End If
+    If PalxNonLTICol = 0 Then
+        PalxNonLTICol = 9
+    End If
+    If PalxNonLTIRow = 0 Then
+        PalxNonLTIRow = 59
+    End If
+    
+    TopPos = .Range(PalxNonLTIRow & ":" & PalxNonLTIRow).Top
+    LeftPos = .Cells(PalxNonLTIRow, PalxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+
+    PalxNonLTICol = PalxNonLTICol + 1
+  
+    If PalxNonLTICol = 24 Then
+        PalxNonLTIRow = PalxNonLTIRow + 1
+        PalxNonLTICol = 9
+    End If
+End With
+PalExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Amazon()
+'Dim AmaxLTICol As Long, AmaxLTIRow As Long, AmaxNonLTICol As Long, AmaxNonLTIRow As Long
+ If AmaxLTICol >= 176 Then
+        GoTo AmaLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo AmaLTIskip 'Need to change
+    End If
+    If AmaxLTICol = 0 Then
+        AmaxLTICol = 153
+    End If
+    If AmaxLTIRow = 0 Then
+        AmaxLTIRow = 40
+    End If
+With sh_Map
+    TopPos = .Range(AmaxLTIRow & ":" & AmaxLTIRow).Top
+    LeftPos = .Cells(AmaxLTIRow, AmaxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    AmaxLTICol = AmaxLTICol + 2
+    If AmaxLTICol >= 176 Then
+        MsgBox "No More Space for Amazon LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo AmaExeEnd 'Need to change
+AmaLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If AmaxNonLTIRow = 46 Then
+        GoTo AmaExeEnd 'Need to change
+    End If
+    If AmaxNonLTICol >= 176 And AmaxNonLTIRow >= 45 Then  'AP is the Last Column
+        MsgBox "No More Space for Amazon NON-LTI Injuries" 'Need to Change
+        GoTo AmaExeEnd 'Need to Change
+    End If
+    If AmaxNonLTICol = 0 Then
+        AmaxNonLTICol = 153
+    End If
+    If AmaxNonLTIRow = 0 Then
+        AmaxNonLTIRow = 42
+    End If
+    TopPos = .Range(AmaxNonLTIRow & ":" & AmaxNonLTIRow).Top
+    LeftPos = .Cells(AmaxNonLTIRow, AmaxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    AmaxNonLTICol = AmaxNonLTICol + 1
+    If AmaxNonLTICol = 177 Then
+        AmaxNonLTIRow = AmaxNonLTIRow + 1
+        AmaxNonLTICol = 153
+    End If
+End With
+AmaExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Managers_Office()
+'Dim ManxLTICol As Long, ManxLTIRow As Long, ManxNonLTICol As Long, ManxNonLTIRow As Long
+ If ManxLTICol >= 125 Then
+        GoTo ManLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo ManLTIskip 'Need to change
+    End If
+    If ManxLTICol = 0 Then
+        ManxLTICol = 116
+    End If
+    If ManxLTIRow = 0 Then
+        ManxLTIRow = 65
+    End If
+With sh_Map
+    TopPos = .Range(ManxLTIRow & ":" & ManxLTIRow).Top
+    LeftPos = .Cells(ManxLTIRow, ManxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    ManxLTICol = ManxLTICol + 2
+    If ManxLTICol >= 125 Then
+        MsgBox "No More Space for Manager's Office LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo ManExeEnd 'Need to change
+ManLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If ManxNonLTIRow = 70 Then
+        GoTo ManExeEnd 'Need to change
+    End If
+    If ManxNonLTICol >= 125 And ManxNonLTIRow >= 70 Then  'AP is the Last Column
+        MsgBox "No More Space for Manager's Office NON-LTI Injuries" 'Need to Change
+        GoTo ManExeEnd 'Need to Change
+    End If
+    If ManxNonLTICol = 0 Then
+        ManxNonLTICol = 116
+    End If
+    If ManxNonLTIRow = 0 Then
+        ManxNonLTIRow = 67
+    End If
+    TopPos = .Range(ManxNonLTIRow & ":" & ManxNonLTIRow).Top
+    LeftPos = .Cells(ManxNonLTIRow, ManxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    ManxNonLTICol = ManxNonLTICol + 1
+    If ManxNonLTICol = 126 Then
+        ManxNonLTIRow = ManxNonLTIRow + 1
+        ManxNonLTICol = 116
+    End If
+End With
+ManExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_All_Other_Areas()
+'Dim AllxLTICol As Long, AllxLTIRow As Long, AllxNonLTICol As Long, AllxNonLTIRow As Long
+ If AllxLTICol >= 205 Then
+        GoTo AllLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo AllLTIskip 'Need to change
+    End If
+    If AllxLTICol = 0 Then
+        AllxLTICol = 158
+    End If
+    If AllxLTIRow = 0 Then
+        AllxLTIRow = 71
+    End If
+With sh_Map
+    TopPos = .Range(AllxLTIRow & ":" & AllxLTIRow).Top
+    LeftPos = .Cells(AllxLTIRow, AllxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    AllxLTICol = AllxLTICol + 2
+    If AllxLTICol >= 205 Then
+        MsgBox "No More Space for All Other Areas LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo AllExeEnd 'Need to change
+AllLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If AllxNonLTIRow = 76 Then
+        GoTo AllExeEnd 'Need to change
+    End If
+    If AllxNonLTICol >= 205 And AllxNonLTIRow >= 75 Then  'AP is the Last Column
+        MsgBox "No More Space for All Other Areas NON-LTI Injuries" 'Need to Change
+        GoTo AllExeEnd 'Need to Change
+    End If
+    If AllxNonLTICol = 0 Then
+        AllxNonLTICol = 158
+    End If
+    If AllxNonLTIRow = 0 Then
+        AllxNonLTIRow = 73
+    End If
+    TopPos = .Range(AllxNonLTIRow & ":" & AllxNonLTIRow).Top
+    LeftPos = .Cells(AllxNonLTIRow, AllxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    AllxNonLTICol = AllxNonLTICol + 1
+    If AllxNonLTICol = 206 Then
+        AllxNonLTIRow = AllxNonLTIRow + 1
+        AllxNonLTICol = 158
+    End If
+End With
+AllExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Car_park()
+'Dim CarxLTICol As Long, CarxLTIRow As Long, CarxNonLTICol As Long, CarxNonLTIRow As Long
+ If CarxLTICol >= 192 Then
+        GoTo CarLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo CarLTIskip 'Need to change
+    End If
+    If CarxLTICol = 0 Then
+        CarxLTICol = 173
+    End If
+    If CarxLTIRow = 0 Then
+        CarxLTIRow = 58
+    End If
+With sh_Map
+    TopPos = .Range(CarxLTIRow & ":" & CarxLTIRow).Top
+    LeftPos = .Cells(CarxLTIRow, CarxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    CarxLTICol = CarxLTICol + 2
+    If CarxLTICol >= 192 Then
+        MsgBox "No More Space for Car Park LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo CarExeEnd 'Need to change
+CarLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If CarxNonLTIRow = 63 Then
+        GoTo CarExeEnd 'Need to change
+    End If
+    If CarxNonLTICol >= 193 And CarxNonLTIRow >= 62 Then  'AP is the Last Column
+        MsgBox "No More Space for Car Park NON-LTI Injuries" 'Need to Change
+        GoTo CarExeEnd 'Need to Change
+    End If
+    If CarxNonLTICol = 0 Then
+        CarxNonLTICol = 173
+    End If
+    If CarxNonLTIRow = 0 Then
+        CarxNonLTIRow = 60
+    End If
+    TopPos = .Range(CarxNonLTIRow & ":" & CarxNonLTIRow).Top
+    LeftPos = .Cells(CarxNonLTIRow, CarxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    CarxNonLTICol = CarxNonLTICol + 1
+    If CarxNonLTICol = 193 Then
+        CarxNonLTIRow = CarxNonLTIRow + 1
+        CarxNonLTICol = 173
+    End If
+End With
+CarExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Canteen()
+'Dim CanxLTICol As Long, CanxLTIRow As Long, CanxNonLTICol As Long, CanxNonLTIRow As Long
+ If CanxLTICol >= 186 Then
+        GoTo CanLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo CanLTIskip 'Need to change
+    End If
+    If CanxLTICol = 0 Then
+        CanxLTICol = 173
+    End If
+    If CanxLTIRow = 0 Then
+        CanxLTIRow = 7
+    End If
+With sh_Map
+    TopPos = .Range(CanxLTIRow & ":" & CanxLTIRow).Top
+    LeftPos = .Cells(CanxLTIRow, CanxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    CanxLTICol = CanxLTICol + 2
+    If CanxLTICol >= 186 Then
+        MsgBox "No More Space for Canteen LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo CanExeEnd 'Need to change
+CanLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If CanxNonLTIRow = 12 Then
+        GoTo CanExeEnd 'Need to change
+    End If
+    If CanxNonLTICol >= 187 And CanxNonLTIRow >= 11 Then  'AP is the Last Column
+        MsgBox "No More Space for Canteen NON-LTI Injuries" 'Need to Change
+        GoTo CanExeEnd 'Need to Change
+    End If
+    If CanxNonLTICol = 0 Then
+        CanxNonLTICol = 173
+    End If
+    If CanxNonLTIRow = 0 Then
+        CanxNonLTIRow = 9
+    End If
+    TopPos = .Range(CanxNonLTIRow & ":" & CanxNonLTIRow).Top
+    LeftPos = .Cells(CanxNonLTIRow, CanxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    CanxNonLTICol = CanxNonLTICol + 1
+    If CanxNonLTICol = 187 Then
+        CanxNonLTIRow = CanxNonLTIRow + 1
+        CanxNonLTICol = 173
+    End If
+End With
+CanExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_DHL()
+'Dim DhlxLTICol As Long, DhlxLTIRow As Long, DhlxNonLTICol As Long, DhlxNonLTIRow As Long
+
+    If DhlxLTICol >= 23 Then
+        GoTo DhlLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo DhlLTIskip 'Need to change
+    End If
+    If DhlxLTICol = 0 Then
+        DhlxLTICol = 9
+    End If
+    If DhlxLTIRow = 0 Then
+        DhlxLTIRow = 28
+    End If
+With sh_Map
+    TopPos = .Range(DhlxLTIRow & ":" & DhlxLTIRow).Top
+    LeftPos = .Cells(DhlxLTIRow, DhlxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    DhlxLTICol = DhlxLTICol + 2
+    If DhlxLTICol >= 23 Then
+        MsgBox "No More Space for DHL LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo DhlExeEnd 'Need to change
+DhlLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If DhlxNonLTIRow = 33 Then
+        GoTo DhlExeEnd 'Need to change
+    End If
+    If DhlxNonLTICol >= 24 And DhlxNonLTIRow >= 32 Then  'AP is the Last Column
+        MsgBox "No More Space for DHL NON-LTI Injuries" 'Need to Change
+        GoTo DhlExeEnd 'Need to Change
+    End If
+    If DhlxNonLTICol = 0 Then
+        DhlxNonLTICol = 9
+    End If
+    If DhlxNonLTIRow = 0 Then
+        DhlxNonLTIRow = 30
+    End If
+    TopPos = .Range(DhlxNonLTIRow & ":" & DhlxNonLTIRow).Top
+    LeftPos = .Cells(DhlxNonLTIRow, DhlxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    DhlxNonLTICol = DhlxNonLTICol + 1
+    If DhlxNonLTICol = 24 Then
+        DhlxNonLTIRow = DhlxNonLTIRow + 1
+        DhlxNonLTICol = 9
+    End If
+End With
+DhlExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_MHE_Area()
+'Dim MhexLTICol As Long, MhexLTIRow As Long, MhexNonLTICol As Long, MhexNonLTIRow As Long
+If MhexLTICol >= 125 Then
+        GoTo MheLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo MheLTIskip 'Need to change
+    End If
+    If MhexLTICol = 0 Then
+        MhexLTICol = 116
+    End If
+    If MhexLTIRow = 0 Then
+        MhexLTIRow = 7
+    End If
+With sh_Map
+    TopPos = .Range(MhexLTIRow & ":" & MhexLTIRow).Top
+    LeftPos = .Cells(MhexLTIRow, MhexLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    MhexLTICol = MhexLTICol + 2
+    If MhexLTICol >= 125 Then
+        MsgBox "No More Space for MHE Area LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo MheExeEnd 'Need to change
+MheLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If MhexNonLTIRow = 14 Then
+        GoTo MheExeEnd 'Need to change
+    End If
+    If MhexNonLTICol >= 126 And MhexNonLTIRow >= 13 Then  'AP is the Last Column
+        MsgBox "No More Space for MHE NON-LTI Injuries" 'Need to Change
+        GoTo MheExeEnd 'Need to Change
+    End If
+    If MhexNonLTICol = 0 Then
+        MhexNonLTICol = 116
+    End If
+    If MhexNonLTIRow = 0 Then
+        MhexNonLTIRow = 9
+    End If
+    TopPos = .Range(MhexNonLTIRow & ":" & MhexNonLTIRow).Top
+    LeftPos = .Cells(MhexNonLTIRow, MhexNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    MhexNonLTICol = MhexNonLTICol + 1
+    If MhexNonLTICol = 126 Then
+        MhexNonLTIRow = MhexNonLTIRow + 1
+        MhexNonLTICol = 116
+    End If
+End With
+MheExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_3_PL()
+'Dim PlxLTICol As Long, PlxLTIRow As Long, PlxNonLTICol As Long, PlxNonLTIRow As Long
+If PlxLTICol >= 23 Then
+        GoTo PlLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo PlLTIskip 'Need to change
+    End If
+    If PlxLTICol = 0 Then
+        PlxLTICol = 9
+    End If
+    If PlxLTIRow = 0 Then
+        PlxLTIRow = 43
+    End If
+With sh_Map
+    TopPos = .Range(PlxLTIRow & ":" & PlxLTIRow).Top
+    LeftPos = .Cells(PlxLTIRow, PlxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    PlxLTICol = PlxLTICol + 2
+    If PlxLTICol >= 23 Then
+        MsgBox "No More Space for 3PL LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo PlExeEnd 'Need to change
+PlLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If PlxNonLTIRow = 48 Then
+        GoTo PlExeEnd 'Need to change
+    End If
+    If PlxNonLTICol >= 24 And PlxNonLTIRow >= 47 Then  'AP is the Last Column
+        MsgBox "No More Space for 3PL NON-LTI Injuries" 'Need to Change
+        GoTo PlExeEnd 'Need to Change
+    End If
+    If PlxNonLTICol = 0 Then
+        PlxNonLTICol = 9
+    End If
+    If PlxNonLTIRow = 0 Then
+        PlxNonLTIRow = 45
+    End If
+    TopPos = .Range(PlxNonLTIRow & ":" & PlxNonLTIRow).Top
+    LeftPos = .Cells(PlxNonLTIRow, PlxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    PlxNonLTICol = PlxNonLTICol + 1
+    If PlxNonLTICol = 24 Then
+        PlxNonLTIRow = PlxNonLTIRow + 1
+        PlxNonLTICol = 9
+    End If
+End With
+PlExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Outbound()
+'Dim OutxLTICol As Long, OutxLTIRow As Long, OutxNonLTICol As Long, OutxNonLTIRow As Long
+If OutxLTICol >= 64 Then
+        GoTo OutLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo OutLTIskip 'Need to change
+    End If
+    If OutxLTICol = 0 Then
+        OutxLTICol = 26
+    End If
+    If OutxLTIRow = 0 Then
+        OutxLTIRow = 70
+    End If
+With sh_Map
+    TopPos = .Range(OutxLTIRow & ":" & OutxLTIRow).Top
+    LeftPos = .Cells(OutxLTIRow, OutxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    OutxLTICol = OutxLTICol + 2
+    If OutxLTICol >= 64 Then
+        MsgBox "No More Space for Outbound LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo OutExeEnd 'Need to change
+OutLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If OutxNonLTIRow = 74 Then
+        GoTo OutExeEnd 'Need to change
+    End If
+    If OutxNonLTICol >= 65 And OutxNonLTIRow >= 73 Then  'AP is the Last Column
+        MsgBox "No More Space for Outbound NON-LTI Injuries" 'Need to Change
+        GoTo OutExeEnd 'Need to Change
+    End If
+    If OutxNonLTICol = 0 Then
+        OutxNonLTICol = 26
+    End If
+    If OutxNonLTIRow = 0 Then
+        OutxNonLTIRow = 72
+    End If
+    TopPos = .Range(OutxNonLTIRow & ":" & OutxNonLTIRow).Top
+    LeftPos = .Cells(OutxNonLTIRow, OutxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    OutxNonLTICol = OutxNonLTICol + 1
+    If OutxNonLTICol = 65 Then
+        OutxNonLTIRow = OutxNonLTIRow + 1
+        OutxNonLTICol = 26
+    End If
+End With
+OutExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_End_Bays()
+'Dim EndxLTICol As Long, EndxLTIRow As Long, EndxNonLTICol As Long, EndxNonLTIRow As Long
+If EndxLTICol >= 23 Then
+        GoTo EndLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo EndLTIskip 'Need to change
+    End If
+    If EndxLTICol = 0 Then
+        EndxLTICol = 6
+    End If
+    If EndxLTIRow = 0 Then
+        EndxLTIRow = 70
+    End If
+With sh_Map
+    TopPos = .Range(EndxLTIRow & ":" & EndxLTIRow).Top
+    LeftPos = .Cells(EndxLTIRow, EndxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    EndxLTICol = EndxLTICol + 2
+    If EndxLTICol >= 23 Then
+        MsgBox "No More Space for End Bays LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo EndExeEnd 'Need to change
+EndLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If EndxNonLTIRow = 74 Then
+        GoTo EndExeEnd 'Need to change
+    End If
+    If EndxNonLTICol >= 24 And EndxNonLTIRow >= 73 Then  'AP is the Last Column
+        MsgBox "No More Space for End Bays NON-LTI Injuries" 'Need to Change
+        GoTo EndExeEnd 'Need to Change
+    End If
+    If EndxNonLTICol = 0 Then
+        EndxNonLTICol = 6
+    End If
+    If EndxNonLTIRow = 0 Then
+        EndxNonLTIRow = 72
+    End If
+    TopPos = .Range(EndxNonLTIRow & ":" & EndxNonLTIRow).Top
+    LeftPos = .Cells(EndxNonLTIRow, EndxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    EndxNonLTICol = EndxNonLTICol + 1
+    If EndxNonLTICol = 24 Then
+        EndxNonLTIRow = EndxNonLTIRow + 1
+        EndxNonLTICol = 6
+    End If
+End With
+EndExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Service_Centre()
+'Dim SerxLTICol As Long, SerxLTIRow As Long, SerxNonLTICol As Long, SerxNonLTIRow As Long
+If SerxLTICol >= 146 Then
+        GoTo SerLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo SerLTIskip 'Need to change
+    End If
+    If SerxLTICol = 0 Then
+        SerxLTICol = 129
+    End If
+    If SerxLTIRow = 0 Then
+        SerxLTIRow = 20
+    End If
+With sh_Map
+    TopPos = .Range(SerxLTIRow & ":" & SerxLTIRow).Top
+    LeftPos = .Cells(SerxLTIRow, SerxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    SerxLTICol = SerxLTICol + 2
+    If SerxLTICol >= 146 Then
+        MsgBox "No More Space for Service Centre LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo SerExeEnd 'Need to change
+SerLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If SerxNonLTIRow = 25 Then
+        GoTo SerExeEnd 'Need to change
+    End If
+    If SerxNonLTICol >= 146 And SerxNonLTIRow >= 25 Then  'AP is the Last Column
+        MsgBox "No More Space for Service Centre NON-LTI Injuries" 'Need to Change
+        GoTo SerExeEnd 'Need to Change
+    End If
+    If SerxNonLTICol = 0 Then
+        SerxNonLTICol = 129
+    End If
+    If SerxNonLTIRow = 0 Then
+        SerxNonLTIRow = 22
+    End If
+    TopPos = .Range(SerxNonLTIRow & ":" & SerxNonLTIRow).Top
+    LeftPos = .Cells(SerxNonLTIRow, SerxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    SerxNonLTICol = SerxNonLTICol + 1
+    If SerxNonLTICol = 147 Then
+        SerxNonLTIRow = SerxNonLTIRow + 1
+        SerxNonLTICol = 129
+    End If
+End With
+SerExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Yard()
+'Dim YarxLTICol As Long, YarxLTIRow As Long, YarxNonLTICol As Long, YarxNonLTIRow As Long
+If YarxLTICol >= 149 Then
+        GoTo YarLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo YarLTIskip 'Need to change
+    End If
+    If YarxLTICol = 0 Then
+        YarxLTICol = 130
+    End If
+    If YarxLTIRow = 0 Then
+        YarxLTIRow = 71
+    End If
+With sh_Map
+    TopPos = .Range(YarxLTIRow & ":" & YarxLTIRow).Top
+    LeftPos = .Cells(YarxLTIRow, YarxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    YarxLTICol = YarxLTICol + 2
+    If YarxLTICol >= 149 Then
+        MsgBox "No More Space for the Yard LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo YarExeEnd 'Need to change
+YarLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If YarxNonLTIRow = 76 Then
+        GoTo YarExeEnd 'Need to change
+    End If
+    If YarxNonLTICol >= 149 And YarxNonLTIRow >= 76 Then  'AP is the Last Column
+        MsgBox "No More Space for the Yard NON-LTI Injuries" 'Need to Change
+        GoTo YarExeEnd 'Need to Change
+    End If
+    If YarxNonLTICol = 0 Then
+        YarxNonLTICol = 130
+    End If
+    If YarxNonLTIRow = 0 Then
+        YarxNonLTIRow = 73
+    End If
+    TopPos = .Range(YarxNonLTIRow & ":" & YarxNonLTIRow).Top
+    LeftPos = .Cells(YarxNonLTIRow, YarxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    YarxNonLTICol = YarxNonLTICol + 1
+    If YarxNonLTICol = 150 Then
+        YarxNonLTIRow = YarxNonLTIRow + 1
+        YarxNonLTICol = 130
+    End If
+End With
+YarExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Reception()
+'Dim RecxLTICol As Long, RecxLTIRow As Long, RecxNonLTICol As Long, RecxNonLTIRow As Long
+If RecxLTICol >= 197 Then
+        GoTo RecLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo RecLTIskip 'Need to change
+    End If
+    If RecxLTICol = 0 Then
+        RecxLTICol = 182
+    End If
+    If RecxLTIRow = 0 Then
+        RecxLTIRow = 23
+    End If
+With sh_Map
+    TopPos = .Range(RecxLTIRow & ":" & RecxLTIRow).Top
+    LeftPos = .Cells(RecxLTIRow, RecxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    RecxLTICol = RecxLTICol + 2
+    If RecxLTICol >= 197 Then
+        MsgBox "No More Space for the Reception LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo RecExeEnd 'Need to change
+RecLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If RecxNonLTIRow = 28 Then
+        GoTo RecExeEnd 'Need to change
+    End If
+    If RecxNonLTICol >= 197 And RecxNonLTIRow >= 28 Then  'AP is the Last Column
+        MsgBox "No More Space for the Reception NON-LTI Injuries" 'Need to Change
+        GoTo RecExeEnd 'Need to Change
+    End If
+    If RecxNonLTICol = 0 Then
+        RecxNonLTICol = 182
+    End If
+    If RecxNonLTIRow = 0 Then
+        RecxNonLTIRow = 25
+    End If
+    TopPos = .Range(RecxNonLTIRow & ":" & RecxNonLTIRow).Top
+    LeftPos = .Cells(RecxNonLTIRow, RecxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    RecxNonLTICol = RecxNonLTICol + 1
+    If RecxNonLTICol = 198 Then
+        RecxNonLTIRow = RecxNonLTIRow + 1
+        RecxNonLTICol = 182
+    End If
+End With
+RecExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Security_Area()
+'Dim SecxLTICol As Long, SecxLTIRow As Long, SecxNonLTICol As Long, SecxNonLTIRow As Long
+If SecxLTICol >= 163 Then
+        GoTo SecLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo SecLTIskip 'Need to change
+    End If
+    If SecxLTICol = 0 Then
+        SecxLTICol = 150
+    End If
+    If SecxLTIRow = 0 Then
+        SecxLTIRow = 7
+    End If
+With sh_Map
+    TopPos = .Range(SecxLTIRow & ":" & SecxLTIRow).Top
+    LeftPos = .Cells(SecxLTIRow, SecxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    SecxLTICol = SecxLTICol + 2
+    If SecxLTICol >= 163 Then
+        MsgBox "No More Space for the Security LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo SecExeEnd 'Need to change
+SecLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If SecxNonLTIRow = 12 Then
+        GoTo SecExeEnd 'Need to change
+    End If
+    If SecxNonLTICol >= 163 And SecxNonLTIRow >= 12 Then  'AP is the Last Column
+        MsgBox "No More Space for the Security NON-LTI Injuries" 'Need to Change
+        GoTo SecExeEnd 'Need to Change
+    End If
+    If SecxNonLTICol = 0 Then
+        SecxNonLTICol = 150
+    End If
+    If SecxNonLTIRow = 0 Then
+        SecxNonLTIRow = 9
+    End If
+    TopPos = .Range(SecxNonLTIRow & ":" & SecxNonLTIRow).Top
+    LeftPos = .Cells(SecxNonLTIRow, SecxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    SecxNonLTICol = SecxNonLTICol + 1
+    If SecxNonLTICol = 164 Then
+        SecxNonLTIRow = SecxNonLTIRow + 1
+        SecxNonLTICol = 150
+    End If
+End With
+SecExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Side_Racking()
+'Dim SidxLTICol As Long, SidxLTIRow As Long, SidxNonLTICol As Long, SidxNonLTIRow As Long
+If SidxLTIRow >= 34 Then
+        GoTo SidLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+' Initialization Processs - Determining the start position on the Map
+    If BolLti <> True Then
+        GoTo SidLTIskip 'Need to change
+    End If
+    If SidxLTICol = 0 Then
+        SidxLTICol = 6
+    End If
+    If SidxLTIRow = 0 Then
+        SidxLTIRow = 28
+    End If
+With sh_Map
+    TopPos = .Range(SidxLTIRow & ":" & SidxLTIRow).Top
+    LeftPos = .Cells(SidxLTIRow, SidxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    SidxLTIRow = SidxLTIRow + 2
+    If SidxLTIRow >= 33 Then
+        MsgBox "No More Space for the Side Racking LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo SidExeEnd 'Need to change
+SidLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If SidxNonLTIRow = 49 Then
+        GoTo SidExeEnd 'Need to change
+    End If
+    If SidxNonLTICol >= 7 And SidxNonLTIRow >= 49 Then  'AP is the Last Column
+        MsgBox "No More Space for the Side Racking NON-LTI Injuries" 'Need to Change
+        GoTo SidExeEnd 'Need to Change
+    End If
+    If SidxNonLTICol = 0 Then
+        SidxNonLTICol = 6
+    End If
+    If SidxNonLTIRow = 0 Then
+        SidxNonLTIRow = 34
+    End If
+    TopPos = .Range(SidxNonLTIRow & ":" & SidxNonLTIRow).Top
+    LeftPos = .Cells(SidxNonLTIRow, SidxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    SidxNonLTICol = SidxNonLTICol + 1
+    If SidxNonLTICol = 8 Then
+        SidxNonLTIRow = SidxNonLTIRow + 1
+        SidxNonLTICol = 6
+    End If
+End With
+SidExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+
+Private Sub Execute_Lockers()
+'Dim LocxLTICol As Long, LocxLTIRow As Long, LocxNonLTICol As Long, LocxNonLTIRow As Long
+If LocxLTICol >= 142 Then
+        GoTo LocLTIskip 'Need to change
+    End If
+' Assigning all LTI values
+    If BolLti <> True Then
+        GoTo LocLTIskip 'Need to change
+    End If
+    If LocxLTICol = 0 Then
+        LocxLTICol = 129
+    End If
+    If LocxLTIRow = 0 Then
+        LocxLTIRow = 7
+    End If
+With sh_Map
+    TopPos = .Range(LocxLTIRow & ":" & LocxLTIRow).Top
+    LeftPos = .Cells(LocxLTIRow, LocxLTICol).Left
+    sh_Map.Shapes("ButtonLarge").Duplicate.Name = "ShpInjuryIsLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryIsLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+    End With
+    LocxLTICol = LocxLTICol + 2
+    If LocxLTICol >= 142 Then
+        MsgBox "No More Space for the Lockers LTI Injuries" 'Need to Change
+    End If
+End With
+    GoTo LocExeEnd 'Need to change
+LocLTIskip: 'Need to change
+' Assigning all NON-LTI values
+With sh_Map
+    If LocxNonLTIRow = 12 Then
+        GoTo LocExeEnd 'Need to change
+    End If
+    If LocxNonLTICol >= 143 And LocxNonLTIRow >= 11 Then  'AP is the Last Column
+        MsgBox "No More Space for the Lockers NON-LTI Injuries" 'Need to Change
+        GoTo LocExeEnd 'Need to Change
+    End If
+    If LocxNonLTICol = 0 Then
+        LocxNonLTICol = 129
+    End If
+    If LocxNonLTIRow = 0 Then
+        LocxNonLTIRow = 9
+    End If
+    TopPos = .Range(LocxNonLTIRow & ":" & LocxNonLTIRow).Top
+    LeftPos = .Cells(LocxNonLTIRow, LocxNonLTICol).Left
+    sh_Map.Shapes("ButtonMedRd").Duplicate.Name = "ShpInjuryNoLTI" & Format(MainLoopCount)
+    With sh_Map.Shapes("ShpInjuryNoLTI" & Format(MainLoopCount))
+        .Top = TopPos
+        .Left = LeftPos
+        If BolAid <> True Then
+            .Fill.ForeColor.RGB = RGB(255, 191, 0)
+        End If
+    End With
+    LocxNonLTICol = LocxNonLTICol + 1
+    If LocxNonLTICol = 143 Then
+        LocxNonLTIRow = LocxNonLTIRow + 1
+        LocxNonLTICol = 129
+    End If
+End With
+LocExeEnd: 'Need to change
+MainLoopCount = MainLoopCount + 1
+Call Main_Loop
+End Sub
+Private Sub Execute_End()
+
+BolAid = 0
+BolLti = 0
+DeptBol = 0
+DeptName = 0
+f = 0
+FirstAid = 0
+LastRowInj = 0
+LastRowFilter = 0
+LeftPos = 0
+MainLoop = 0
+MainLoopCount = 0
+NewItemNum = 0
+Severity = 0
+TargCell = 0
+TopPos = 0
+xCol = 0
+xRow = 0
+InjuriesFilterbyYear = False
+
+End Sub
+Sub Clear_Injuries()
+Dim DotShp As Shape
+'Clear all Objects (Dots)
+With sh_Map
+    For Each DotShp In .Shapes
+        On Error Resume Next
+            If InStr(DotShp.Name, "ShpInjury") > 0 Then DotShp.Delete 'deleting existed shapes assigned to an injury
+            If InStr(DotShp.Name, "ObservationShp") > 0 Then DotShp.Delete 'deleting existed shapes assigned to an observation
+        On Error GoTo 0
+
+    Next DotShp
+End With
+Sheet1.Range("C17").Value = 0
+Application.ScreenUpdating = True
+
+End Sub
+
+Private Sub TerminateAllSubs()
+DeptName = ""
+    End
+
+End Sub
+

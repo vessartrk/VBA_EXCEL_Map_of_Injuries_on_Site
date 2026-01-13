@@ -1,0 +1,60 @@
+Option Explicit
+
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' '           Created By Michael Vessa                ' ''' '' '
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Contact details
+'    - e-mail: vessartrk@gmail.com
+'    - phone: 07511 720 127
+'    - www.linkedin.com/in/michael-vessa-7ab357101
+'    - www.facebook.com/Michael.Vessa.Uk
+'    - www.youtube.com/@Guy_vs_PC
+'    - www.github.com/vessartrk
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Dim ItemObject As String
+Dim ItemRow_selected As Long
+Dim Item_31 As Variant, Item_32 As Variant, Item_33 As Variant
+
+Sub Item_Select()
+With sh_Map
+    ItemObject = Replace(Application.Caller, Left(Application.Caller, 14), "") 'Extract Item ID
+    Sheet1.Range("C16").Value = ItemObject
+    Load_Item
+End With
+End Sub
+Sub Load_Item()
+With Sheet4
+    If Sheet1.Range("C16").Value = Empty Then
+        MsgBox "Please select a correct calendar item to load"
+        Exit Sub
+    End If
+
+    ItemRow_selected = Sheet1.Range("C16").Value 'Item Row
+    
+    Item_31 = .Cells(ItemRow_selected, 31).Value
+    Item_32 = .Cells(ItemRow_selected, 32).Value
+    Item_33 = .Cells(ItemRow_selected, 33).Value
+End With
+With Item_Form
+    .TextBox1.Value = Item_31
+    .TextBox2.Value = Item_32
+    .TextBox3.Value = Item_33
+    .Show
+End With
+
+End Sub
+
+Sub Delete_hidden_shapes()
+
+Dim shp As Shape
+Dim ws As Worksheet
+Set ws = ThisWorkbook.Worksheets("Map")
+
+For Each shp In ws.Shapes
+    If shp.Visible = msoFalse Then shp.Delete
+Next shp
+
+End Sub
+

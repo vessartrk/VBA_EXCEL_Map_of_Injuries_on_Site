@@ -1,0 +1,101 @@
+Option Explicit
+
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' '           Created By Michael Vessa                ' ''' '' '
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Contact details
+'    - e-mail: vessartrk@gmail.com
+'    - phone: 07511 720 127
+'    - www.linkedin.com/in/michael-vessa-7ab357101
+'    - www.facebook.com/Michael.Vessa.Uk
+'    - www.youtube.com/@Guy_vs_PC
+'    - www.github.com/vessartrk
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Sub Month_Filter()
+
+Dim LastRowFM2 As Long
+Dim CalLoop2 As Long
+LastRowFM2 = 0
+CalLoop2 = 0
+Application.ScreenUpdating = False
+
+With Sheet4
+    
+    .Range("AA5: AS999").Clear 'Clear all data in the database
+    LastRowFM2 = .Range("R99999").End(xlUp).Row 'Determine Last Row
+    
+    For CalLoop2 = 1 To LastRowFM2
+   
+        .Range("C4:S" & LastRowFM2).AdvancedFilter xlFilterCopy, CriteriaRange:=.Range("Y4:Z5"), CopyToRange:=.Range("AA4:AQ4"), Unique:=True
+    
+    Next CalLoop2
+    
+End With
+
+Application.ScreenUpdating = True
+Call Type_Filter
+End Sub
+
+Sub Year_Filter()
+
+Dim LastRowFY2 As Long
+Dim FilterByYearLoop2 As Long
+
+LastRowFY2 = 0
+FilterByYearLoop2 = 0
+
+Application.ScreenUpdating = False
+
+With Sheet4
+
+    .Range("AA5: AS999").Clear 'Clear all data in the database
+    LastRowFY2 = .Range("R99999").End(xlUp).Row 'Determine Last Row
+    
+    For FilterByYearLoop2 = 1 To LastRowFY2
+   
+        .Range("C4:S" & LastRowFY2).AdvancedFilter xlFilterCopy, CriteriaRange:=.Range("Y7:Z8"), CopyToRange:=.Range("AA4:AQ4"), Unique:=True
+    
+    Next FilterByYearLoop2
+End With
+
+Application.ScreenUpdating = True
+Call Type_Filter
+End Sub
+
+Sub Type_Filter()
+
+Dim FilterTypeLoop As Long, LastRowFilter As Long
+Dim Severity As String, FirstAid As String
+
+FilterTypeLoop = 0
+LastRowFilter = 0
+Severity = 0
+FirstAid = 0
+
+Application.ScreenUpdating = False
+' Check for the Type of the injury and set its value next to the advanced filter''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+With Sheet4
+    
+    .Range("AR5:AS9999").Clear
+    LastRowFilter = .Range("AA9999").End(xlUp).Row
+    
+    For FilterTypeLoop = 5 To LastRowFilter
+        Severity = .Cells(FilterTypeLoop, 35).Value
+        FirstAid = .Cells(FilterTypeLoop, 34).Value
+        
+            If Severity = "LTI" Then
+                .Cells(FilterTypeLoop, 44).Value = True
+                .Cells(FilterTypeLoop, 45).Value = "Na"
+            Else
+                .Cells(FilterTypeLoop, 44).Value = False
+                If FirstAid = "Yes" Then
+                    .Cells(FilterTypeLoop, 45).Value = True
+                Else
+                    .Cells(FilterTypeLoop, 45).Value = False
+                End If
+            End If
+    Next FilterTypeLoop
+End With
+End Sub

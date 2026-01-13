@@ -1,0 +1,43 @@
+Option Explicit
+
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' '           Created By Michael Vessa                ' ''' '' '
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Contact details
+'    - e-mail: vessartrk@gmail.com
+'    - phone: 07511 720 127
+'    - www.linkedin.com/in/michael-vessa-7ab357101
+'    - www.facebook.com/Michael.Vessa.Uk
+'    - www.youtube.com/@Guy_vs_PC
+'    - www.github.com/vessartrk
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Private Sub Label1_Click()
+
+End Sub
+
+Private Sub UserForm_Initialize()
+    ' Set TextBox properties
+    With TextBox1
+        .MultiLine = True
+        .WordWrap = True
+        .ScrollBars = 2 ' Vertical Scrollbar
+        .EnterKeyBehavior = True ' Allow Enter to create new lines
+    End With
+    
+    With TextBox2
+        .MultiLine = True
+        .WordWrap = True
+        .ScrollBars = 2 ' Vertical Scrollbar
+        .EnterKeyBehavior = True ' Allow Enter to create new lines
+    End With
+    
+    With TextBox3
+        .MultiLine = True
+        .WordWrap = True
+        .ScrollBars = 2 ' Vertical Scrollbar
+        .EnterKeyBehavior = True ' Allow Enter to create new lines
+    End With
+End Sub
+

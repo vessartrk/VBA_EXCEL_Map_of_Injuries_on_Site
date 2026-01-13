@@ -1,0 +1,2888 @@
+Option Explicit
+
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' ''''''''''''''''''''''''''''''''''''''''''''''''''''' ''' '' '
+' '' ''' '           Created By Michael Vessa                ' ''' '' '
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Contact details
+'    - e-mail: vessartrk@gmail.com
+'    - phone: 07511 720 127
+'    - www.linkedin.com/in/michael-vessa-7ab357101
+'    - www.facebook.com/Michael.Vessa.Uk
+'    - www.youtube.com/@Guy_vs_PC
+'    - www.github.com/vessartrk
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Dim ObsShpObj As Object
+' Individual dept variables
+Dim FacxObsCol As Integer, FacxObsRow As Integer, FacLoop As Integer
+Dim NarxObsCol As Integer, NarxObsRow As Integer, NarLoop As Integer
+Dim GooxObsCol As Integer, GooxObsRow As Integer, GooLoop As Integer
+Dim RetxObsCol As Integer, RetxObsRow As Integer, RetLoop As Integer
+Dim ArgxObsCol As Integer, ArgxObsRow As Integer, ArgLoop As Integer
+Dim BunxObsCol As Integer, BunxObsRow As Integer, BunLoop As Integer
+Dim CorxObsCol As Integer, CorxObsRow As Integer, CorLoop As Integer
+Dim MobxObsCol As Integer, MobxObsRow As Integer, MobLoop As Integer
+Dim ResxObsCol As Integer, ResxObsRow As Integer, ResLoop As Integer
+Dim WidxObsCol As Integer, WidxObsRow As Integer, WidLoop As Integer
+Dim CubxObsCol As Integer, CubxObsRow As Integer, CubLoop As Integer
+Dim PicxObsCol As Integer, PicxObsRow As Integer, PicLoop As Integer
+Dim AmvxObsCol As Integer, AmvxObsRow As Integer, AmvLoop As Integer
+Dim QAxObsCol As Integer, QAxObsRow As Integer, QALoop As Integer
+Dim OffxObsCol As Integer, OffxObsRow As Integer, OffLoop As Integer
+Dim RefxObsCol As Integer, RefxObsRow As Integer, RefLoop As Integer
+Dim TvsxObsCol As Integer, TvsxObsRow As Integer, TvsLoop As Integer
+Dim PalxObsCol As Integer, PalxObsRow As Integer, PalLoop As Integer
+Dim AmaxObsCol As Integer, AmaxObsRow As Integer, AmaLoop As Integer
+Dim ManxObsCol As Integer, ManxObsRow As Integer, ManLoop As Integer
+Dim AllxObsCol As Integer, AllxObsRow As Integer, AllLoop As Integer
+Dim CarxObsCol As Integer, CarxObsRow As Integer, CarLoop As Integer
+Dim CanxObsCol As Integer, CanxObsRow As Integer, CanLoop As Integer
+Dim DhlxObsCol As Integer, DhlxObsRow As Integer, DhlLoop As Integer
+Dim MhexObsCol As Integer, MhexObsRow As Integer, MheLoop As Integer
+Dim PlxObsCol As Integer, PlxObsRow As Integer, PlLoop As Integer
+Dim OutxObsCol As Integer, OutxObsRow As Integer, OutLoop As Integer
+Dim EndxObsCol As Integer, EndxObsRow As Integer, EndLoop As Integer
+Dim SerxObsCol As Integer, SerxObsRow As Integer, SerLoop As Integer
+Dim YarxObsCol As Integer, YarxObsRow As Integer, YarLoop As Integer
+Dim RecxObsCol As Integer, RecxObsRow As Integer, RecLoop As Integer
+Dim SecxObsCol As Integer, SecxObsRow As Integer, SecLoop As Integer
+Dim SidxObsCol As Integer, SidxObsRow As Integer, SidLoop As Integer
+Dim LocxObsCol As Integer, LocxObsRow As Integer, LocLoop As Integer
+' Main Loop variables
+Dim MainObsLoop As Long, ObservationDatetoRow As Long, ObservationsNum As Long, NewShapeIDNum As Long
+Dim TopObsPos As Long, LeftObsPos As Long, CheckIfNoValue As Long
+
+'Fac - Facilities
+'Nar - Narrow Aisle
+'Goo - Goods In
+'Ret - Returns 1st Floor
+'Arg - Argos
+'Bun - Bundles
+'Cor - Core
+'Mob - Mobile Floor
+'Res - Returns 2nd Floor
+'Wid - Wide Aisles
+'Cub - Cubiscan
+'Pic - Pick Tower
+'Amv - Amazon Vendorflex
+'QA - QA
+'Off - Offices
+'Ref - Reflex Pack benches
+'Tvs - TV Bulk Area
+'Pal - Pallnet
+'Ama - Amazon
+'Man - Managers Office
+'All - All Other Areas
+'Car - Car park
+'Can - Canteen
+'Dhl - DHL
+'Mhe - MHE Area
+'Pl - 3 PL
+'Out - Outbound
+'End - End Bays
+'Ser - Service Centre
+'Yar - Yard
+'Rec - Reception
+'Sec - Security Area
+'Sid - Side Racking
+'Loc - Lockers
+
+'Numbering
+
+'4   Facilities
+'5   Narrow Aisle
+'6   Goods In
+'7   Returns 1st Floor
+'8   Argos
+'9   Bundles
+'10  Core
+'11  Mobile Floor
+'12  Returns 2nd Floor
+'13  Wide Aisles
+'14  Cubiscan
+'15  Pick Tower
+'16  Amazon Vendorflex
+'17  QA
+'18  Offices
+'19  Reflex Pack benches
+'20  TV Bulk Area
+'21  Pallnet
+'22  Amazon
+'23  Managers Office
+'24  All Other Areas
+'25  Car park
+'26  Canteen
+'27  DHL
+'28  MHE Area
+'29  3PL
+'30  Outbound
+'31  End Bays
+'32  Service Centre
+'33  Yard
+'34  Reception
+'35  Security Area
+'36  Side Racking
+'37  Lockers
+
+Sub Observations_Initialization_Month()
+
+'Clearing the Memory
+FacLoop = 0
+NarLoop = 0
+GooLoop = 0
+RetLoop = 0
+ArgLoop = 0
+BunLoop = 0
+CorLoop = 0
+MobLoop = 0
+ResLoop = 0
+WidLoop = 0
+CubLoop = 0
+PicLoop = 0
+AmvLoop = 0
+QALoop = 0
+OffLoop = 0
+RefLoop = 0
+TvsLoop = 0
+PalLoop = 0
+AmaLoop = 0
+ManLoop = 0
+AllLoop = 0
+CarLoop = 0
+CanLoop = 0
+DhlLoop = 0
+MheLoop = 0
+PlLoop = 0
+OutLoop = 0
+EndLoop = 0
+SerLoop = 0
+YarLoop = 0
+RecLoop = 0
+SecLoop = 0
+SidLoop = 0
+LocLoop = 0
+FacxObsCol = 0
+FacxObsRow = 0
+NarxObsCol = 0
+NarxObsRow = 0
+GooxObsCol = 0
+GooxObsRow = 0
+RetxObsCol = 0
+RetxObsRow = 0
+ArgxObsCol = 0
+ArgxObsRow = 0
+BunxObsCol = 0
+BunxObsRow = 0
+CorxObsCol = 0
+CorxObsRow = 0
+MobxObsCol = 0
+MobxObsRow = 0
+ResxObsCol = 0
+ResxObsRow = 0
+WidxObsCol = 0
+WidxObsRow = 0
+CubxObsCol = 0
+CubxObsRow = 0
+PicxObsCol = 0
+PicxObsRow = 0
+AmvxObsCol = 0
+AmvxObsRow = 0
+QAxObsCol = 0
+QAxObsRow = 0
+OffxObsCol = 0
+OffxObsRow = 0
+RefxObsCol = 0
+RefxObsRow = 0
+TvsxObsCol = 0
+TvsxObsRow = 0
+PalxObsCol = 0
+PalxObsRow = 0
+AmaxObsCol = 0
+AmaxObsRow = 0
+ManxObsCol = 0
+ManxObsRow = 0
+AllxObsCol = 0
+AllxObsRow = 0
+CarxObsCol = 0
+CarxObsRow = 0
+CanxObsCol = 0
+CanxObsRow = 0
+DhlxObsCol = 0
+DhlxObsRow = 0
+MhexObsCol = 0
+MhexObsRow = 0
+PlxObsCol = 0
+PlxObsRow = 0
+OutxObsCol = 0
+OutxObsRow = 0
+EndxObsCol = 0
+EndxObsRow = 0
+SerxObsCol = 0
+SerxObsRow = 0
+YarxObsCol = 0
+YarxObsRow = 0
+RecxObsCol = 0
+RecxObsRow = 0
+SecxObsCol = 0
+SecxObsRow = 0
+SidxObsCol = 0
+SidxObsRow = 0
+LocxObsCol = 0
+LocxObsRow = 0
+MainObsLoop = 0
+ObservationDatetoRow = 0
+ObservationsNum = 0
+NewShapeIDNum = 0
+TopObsPos = 0
+LeftObsPos = 0
+CheckIfNoValue = 0
+
+Call Observations_MainLoop_Month
+
+End Sub
+
+Sub Observations_Initialization_Y()
+
+'Clearing the Memory
+FacLoop = 0
+NarLoop = 0
+GooLoop = 0
+RetLoop = 0
+ArgLoop = 0
+BunLoop = 0
+CorLoop = 0
+MobLoop = 0
+ResLoop = 0
+WidLoop = 0
+CubLoop = 0
+PicLoop = 0
+AmvLoop = 0
+QALoop = 0
+OffLoop = 0
+RefLoop = 0
+TvsLoop = 0
+PalLoop = 0
+AmaLoop = 0
+ManLoop = 0
+AllLoop = 0
+CarLoop = 0
+CanLoop = 0
+DhlLoop = 0
+MheLoop = 0
+PlLoop = 0
+OutLoop = 0
+EndLoop = 0
+SerLoop = 0
+YarLoop = 0
+RecLoop = 0
+SecLoop = 0
+SidLoop = 0
+LocLoop = 0
+FacxObsCol = 0
+FacxObsRow = 0
+NarxObsCol = 0
+NarxObsRow = 0
+GooxObsCol = 0
+GooxObsRow = 0
+RetxObsCol = 0
+RetxObsRow = 0
+ArgxObsCol = 0
+ArgxObsRow = 0
+BunxObsCol = 0
+BunxObsRow = 0
+CorxObsCol = 0
+CorxObsRow = 0
+MobxObsCol = 0
+MobxObsRow = 0
+ResxObsCol = 0
+ResxObsRow = 0
+WidxObsCol = 0
+WidxObsRow = 0
+CubxObsCol = 0
+CubxObsRow = 0
+PicxObsCol = 0
+PicxObsRow = 0
+AmvxObsCol = 0
+AmvxObsRow = 0
+QAxObsCol = 0
+QAxObsRow = 0
+OffxObsCol = 0
+OffxObsRow = 0
+RefxObsCol = 0
+RefxObsRow = 0
+TvsxObsCol = 0
+TvsxObsRow = 0
+PalxObsCol = 0
+PalxObsRow = 0
+AmaxObsCol = 0
+AmaxObsRow = 0
+ManxObsCol = 0
+ManxObsRow = 0
+AllxObsCol = 0
+AllxObsRow = 0
+CarxObsCol = 0
+CarxObsRow = 0
+CanxObsCol = 0
+CanxObsRow = 0
+DhlxObsCol = 0
+DhlxObsRow = 0
+MhexObsCol = 0
+MhexObsRow = 0
+PlxObsCol = 0
+PlxObsRow = 0
+OutxObsCol = 0
+OutxObsRow = 0
+EndxObsCol = 0
+EndxObsRow = 0
+SerxObsCol = 0
+SerxObsRow = 0
+YarxObsCol = 0
+YarxObsRow = 0
+RecxObsCol = 0
+RecxObsRow = 0
+SecxObsCol = 0
+SecxObsRow = 0
+SidxObsCol = 0
+SidxObsRow = 0
+LocxObsCol = 0
+LocxObsRow = 0
+MainObsLoop = 0
+ObservationDatetoRow = 0
+ObservationsNum = 0
+NewShapeIDNum = 0
+TopObsPos = 0
+LeftObsPos = 0
+CheckIfNoValue = 0
+
+Call Observations_MainLoop_Year
+
+End Sub
+Sub Observations_MainLoop_Month()
+
+Call Delete_hidden_shapes
+
+With Sheet2
+    If NewShapeIDNum = 0 Then NewShapeIDNum = 1
+    ObservationDatetoRow = Sheet1.Range("C14").Value
+    CheckIfNoValue = WorksheetFunction.Sum(.Range(.Cells(ObservationDatetoRow, 4), .Cells(ObservationDatetoRow, 37)))
+    If CheckIfNoValue = 0 Then
+        MsgBox "No data for selected month"
+        End
+    End If
+    Sheet1.Range("C18").Value = CheckIfNoValue
+    ObservationDatetoRow = Sheet1.Range("C14").Value '4-37
+NextMainForLoop:
+        
+        If MainObsLoop = 0 Then MainObsLoop = 4
+        If MainObsLoop = 38 Then Exit Sub
+            ObservationsNum = Sheet2.Cells(ObservationDatetoRow, MainObsLoop).Value
+            
+            If MainObsLoop = 4 Then
+                Call Fac_Obs_ini
+            End If
+            
+            If MainObsLoop = 5 Then
+                Call Nar_Obs_ini
+            End If
+                  
+            If MainObsLoop = 6 Then
+                Call Goo_Obs_ini
+            End If
+                        
+            If MainObsLoop = 7 Then
+                Call Ret_Obs_ini
+            End If
+                        
+            If MainObsLoop = 8 Then
+                Call Arg_Obs_ini
+            End If
+                        
+            If MainObsLoop = 9 Then
+                Call Bun_Obs_ini
+            End If
+                        
+            If MainObsLoop = 10 Then
+                Call Cor_Obs_ini
+            End If
+                        
+            If MainObsLoop = 11 Then
+                Call Mob_Obs_ini
+            End If
+                        
+            If MainObsLoop = 12 Then
+                Call Res_Obs_ini
+            End If
+                        
+            If MainObsLoop = 13 Then
+                Call Wid_Obs_ini
+            End If
+                        
+            If MainObsLoop = 14 Then
+                Call Cub_Obs_ini
+            End If
+                        
+            If MainObsLoop = 15 Then
+                Call Pic_Obs_ini
+            End If
+                        
+            If MainObsLoop = 16 Then
+                Call Amv_Obs_ini
+            End If
+                        
+            If MainObsLoop = 17 Then
+                Call QA_Obs_ini
+            End If
+                        
+            If MainObsLoop = 18 Then
+                Call Off_Obs_ini
+            End If
+                        
+            If MainObsLoop = 19 Then
+                Call Ref_Obs_ini
+            End If
+                        
+            If MainObsLoop = 20 Then
+                Call Tvs_Obs_ini
+            End If
+                        
+            If MainObsLoop = 21 Then
+                Call Pall_Obs_ini
+            End If
+                        
+            If MainObsLoop = 22 Then
+                Call Ama_Obs_ini
+            End If
+                        
+            If MainObsLoop = 23 Then
+                Call Man_Obs_ini
+            End If
+                        
+            If MainObsLoop = 24 Then
+                Call All_Obs_ini
+            End If
+                        
+            If MainObsLoop = 25 Then
+                Call Car_Obs_ini
+            End If
+                        
+            If MainObsLoop = 26 Then
+                Call Can_Obs_ini
+            End If
+                        
+            If MainObsLoop = 27 Then
+                Call Dhl_Obs_ini
+            End If
+                        
+            If MainObsLoop = 28 Then
+                Call Mhe_Obs_ini
+            End If
+                        
+            If MainObsLoop = 29 Then
+                Call Pl_Obs_ini
+            End If
+                        
+            If MainObsLoop = 30 Then
+                Call Out_Obs_ini
+            End If
+                        
+            If MainObsLoop = 31 Then
+                Call End_Obs_ini
+            End If
+                        
+            If MainObsLoop = 32 Then
+                Call Ser_Obs_ini
+            End If
+                        
+            If MainObsLoop = 33 Then
+                Call Yar_Obs_ini
+            End If
+                        
+            If MainObsLoop = 34 Then
+                Call Rec_Obs_ini
+            End If
+                        
+            If MainObsLoop = 35 Then
+                Call Sec_Obs_ini
+            End If
+                                    
+            If MainObsLoop = 36 Then
+                Call Sid_Obs_ini
+            End If
+                                    
+            If MainObsLoop = 37 Then
+                Call Loc_Obs_ini
+            End If
+                                    
+            If MainObsLoop = 37 Then
+                Call Loc_Obs_ini_Year
+            End If
+        'Next MainObsLoop
+End With
+End Sub
+Sub Fac_Obs_ini()
+'Dim FacxObsCol As Long, FacxObsRow As Long, FacLoop As Long
+'Col = 116 - 125
+'Row = 48 - 59
+With sh_Map
+    For FacLoop = 1 To ObservationsNum
+        If FacxObsCol = 0 Then FacxObsCol = 116
+        If FacxObsRow = 0 Then FacxObsRow = 48
+        If FacxObsRow = 60 Then
+            MsgBox "No more space for Facilities Observations"
+            GoTo SkipFacLoop
+        End If
+        TopObsPos = .Range(FacxObsRow & ":" & FacxObsRow).Top
+        LeftObsPos = .Cells(FacxObsRow, FacxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            FacxObsCol = FacxObsCol + 1
+            If FacxObsCol >= 126 Then
+                FacxObsCol = 116
+                FacxObsRow = FacxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If FacLoop = ObservationsNum Then GoTo SkipFacLoop
+    Next FacLoop
+End With
+SkipFacLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Nar_Obs_ini()
+'Dim NarxObsCol As Long, NarxObsRow As Long, NarLoop As Long
+'Col = 67 - 113
+'Row = 34 - 67
+With sh_Map
+    For NarLoop = 1 To ObservationsNum
+        If NarxObsCol = 0 Then NarxObsCol = 67
+        If NarxObsRow = 0 Then NarxObsRow = 34
+        If NarxObsRow = 68 Then
+            MsgBox "No more space for Wide Aisle Observations"
+            GoTo SkipNarLoop
+        End If
+        TopObsPos = .Range(NarxObsRow & ":" & NarxObsRow).Top
+        LeftObsPos = .Cells(NarxObsRow, NarxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            NarxObsCol = NarxObsCol + 1
+            If NarxObsCol >= 114 Then
+                NarxObsCol = 67
+                NarxObsRow = NarxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If NarLoop = ObservationsNum Then GoTo SkipNarLoop
+    Next NarLoop
+End With
+SkipNarLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Goo_Obs_ini()
+'Dim GooxObsCol As Long, GooxObsRow As Long, GooLoop As Long
+'Col = 67 - 103
+'Row = 74 - 79
+With sh_Map
+    For GooLoop = 1 To ObservationsNum
+        If GooxObsCol = 0 Then GooxObsCol = 67
+        If GooxObsRow = 0 Then GooxObsRow = 74
+        If GooxObsRow = 80 Then
+            MsgBox "No more space for Goods In Observations"
+            GoTo SkipGooLoop
+        End If
+        TopObsPos = .Range(GooxObsRow & ":" & GooxObsRow).Top
+        LeftObsPos = .Cells(GooxObsRow, GooxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            GooxObsCol = GooxObsCol + 1
+            If GooxObsCol >= 104 Then
+                GooxObsCol = 67
+                GooxObsRow = GooxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If GooLoop = ObservationsNum Then GoTo SkipGooLoop
+    Next GooLoop
+End With
+SkipGooLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Ret_Obs_ini()
+'Dim RetxObsCol As Long, RetxObsRow As Long, RetLoop As Long
+'Col = 149 - 166
+'Row = 25 - 26
+With sh_Map
+    For RetLoop = 1 To ObservationsNum
+        If RetxObsCol = 0 Then RetxObsCol = 149
+        If RetxObsRow = 0 Then RetxObsRow = 25
+        If RetxObsRow = 27 Then
+            MsgBox "No more space for Returns 1st Floor Observations"
+            GoTo SkipRetLoop
+        End If
+        TopObsPos = .Range(RetxObsRow & ":" & RetxObsRow).Top
+        LeftObsPos = .Cells(RetxObsRow, RetxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            RetxObsCol = RetxObsCol + 1
+            If RetxObsCol >= 167 Then
+                RetxObsCol = 149
+                RetxObsRow = RetxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If RetLoop = ObservationsNum Then GoTo SkipRetLoop
+    Next RetLoop
+End With
+SkipRetLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Arg_Obs_ini()
+'Dim ArgxObsCol As Long, ArgxObsRow As Long, ArgLoop As Long
+'Col = 183 - 206
+'Row = 46 - 54
+With sh_Map
+    For ArgLoop = 1 To ObservationsNum
+        If ArgxObsCol = 0 Then ArgxObsCol = 183
+        If ArgxObsRow = 0 Then ArgxObsRow = 46
+        If ArgxObsRow = 55 Then
+            MsgBox "No more space for Argos Observations"
+            GoTo SkipArgLoop
+        End If
+        TopObsPos = .Range(ArgxObsRow & ":" & ArgxObsRow).Top
+        LeftObsPos = .Cells(ArgxObsRow, ArgxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            ArgxObsCol = ArgxObsCol + 1
+            If ArgxObsCol >= 207 Then
+                ArgxObsCol = 183
+                ArgxObsRow = ArgxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If ArgLoop = ObservationsNum Then GoTo SkipArgLoop
+    Next ArgLoop
+End With
+SkipArgLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Bun_Obs_ini()
+'Dim BunxObsCol As Long, BunxObsRow As Long, BunLoop As Long
+'Col = 133 - 146
+'Row = 46 - 54
+With sh_Map
+    For BunLoop = 1 To ObservationsNum
+        If BunxObsCol = 0 Then BunxObsCol = 133
+        If BunxObsRow = 0 Then BunxObsRow = 46
+        If BunxObsRow = 55 Then
+            MsgBox "No more space for Bundles Observations"
+            GoTo SkipBunLoop
+        End If
+        TopObsPos = .Range(BunxObsRow & ":" & BunxObsRow).Top
+        LeftObsPos = .Cells(BunxObsRow, BunxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            BunxObsCol = BunxObsCol + 1
+            If BunxObsCol >= 147 Then
+                BunxObsCol = 133
+                BunxObsRow = BunxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If BunLoop = ObservationsNum Then GoTo SkipBunLoop
+    Next BunLoop
+End With
+SkipBunLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Cor_Obs_ini()
+'Dim CorxObsCol As Long, CorxObsRow As Long, CorLoop As Long
+'Col = 26 - 43
+'Row = 34 - 42
+With sh_Map
+    For CorLoop = 1 To ObservationsNum
+        If CorxObsCol = 0 Then CorxObsCol = 26
+        If CorxObsRow = 0 Then CorxObsRow = 34
+        If CorxObsRow = 43 Then
+            MsgBox "No more space for Core Observations"
+            GoTo SkipCorLoop
+        End If
+        TopObsPos = .Range(CorxObsRow & ":" & CorxObsRow).Top
+        LeftObsPos = .Cells(CorxObsRow, CorxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CorxObsCol = CorxObsCol + 1
+            If CorxObsCol >= 44 Then
+                CorxObsCol = 26
+                CorxObsRow = CorxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CorLoop = ObservationsNum Then GoTo SkipCorLoop
+    Next CorLoop
+End With
+SkipCorLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Mob_Obs_ini()
+'Dim MobxObsCol As Long, MobxObsRow As Long, MobLoop As Long
+'Col = 182 - 197
+'Row = 28 - 32
+With sh_Map
+    For MobLoop = 1 To ObservationsNum
+        If MobxObsCol = 0 Then MobxObsCol = 182
+        If MobxObsRow = 0 Then MobxObsRow = 28
+        If MobxObsRow = 33 Then
+            MsgBox "No more space for Mobiles Observations"
+            GoTo SkipMobLoop
+        End If
+        TopObsPos = .Range(MobxObsRow & ":" & MobxObsRow).Top
+        LeftObsPos = .Cells(MobxObsRow, MobxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            MobxObsCol = MobxObsCol + 1
+            If MobxObsCol >= 198 Then
+                MobxObsCol = 182
+                MobxObsRow = MobxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If MobLoop = ObservationsNum Then GoTo SkipMobLoop
+    Next MobLoop
+End With
+SkipMobLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Res_Obs_ini()
+'Dim ResxObsCol As Long, ResxObsRow As Long, ResLoop As Long
+'Col = 147 - 166
+'Row = 31 - 35
+With sh_Map
+    For ResLoop = 1 To ObservationsNum
+        If ResxObsCol = 0 Then ResxObsCol = 147
+        If ResxObsRow = 0 Then ResxObsRow = 31
+        If ResxObsRow = 36 Then
+            MsgBox "No more space for Returns 2nd Floor Observations"
+            GoTo SkipResLoop
+        End If
+        TopObsPos = .Range(ResxObsRow & ":" & ResxObsRow).Top
+        LeftObsPos = .Cells(ResxObsRow, ResxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            ResxObsCol = ResxObsCol + 1
+            If ResxObsCol >= 167 Then
+                ResxObsCol = 147
+                ResxObsRow = ResxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If ResLoop = ObservationsNum Then GoTo SkipResLoop
+    Next ResLoop
+End With
+SkipResLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Wid_Obs_ini()
+'Dim WidxObsCol As Long, WidxObsRow As Long, WidLoop As Long
+'Col = 6 - 40
+'Row = 14 - 24
+With sh_Map
+    For WidLoop = 1 To ObservationsNum
+        If WidxObsCol = 0 Then WidxObsCol = 6
+        If WidxObsRow = 0 Then WidxObsRow = 14
+        If WidxObsRow = 25 Then
+            MsgBox "No more space for Wide Aisle Observations"
+            GoTo SkipWidLoop
+        End If
+        TopObsPos = .Range(WidxObsRow & ":" & WidxObsRow).Top
+        LeftObsPos = .Cells(WidxObsRow, WidxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            WidxObsCol = WidxObsCol + 1
+            If WidxObsCol >= 41 Then
+                WidxObsCol = 6
+                WidxObsRow = WidxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If WidLoop = ObservationsNum Then GoTo SkipWidLoop
+    Next WidLoop
+End With
+SkipWidLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Cub_Obs_ini()
+'Dim CubxObsCol As Long, CubxObsRow As Long, CubLoop As Long
+'Col = 106 - 113
+'Row = 74 - 79
+With sh_Map
+    For CubLoop = 1 To ObservationsNum
+        If CubxObsCol = 0 Then CubxObsCol = 106
+        If CubxObsRow = 0 Then CubxObsRow = 74
+        If CubxObsRow = 80 Then
+            MsgBox "No more space for Cubiscan Area Observations"
+            GoTo SkipCubLoop
+        End If
+        TopObsPos = .Range(CubxObsRow & ":" & CubxObsRow).Top
+        LeftObsPos = .Cells(CubxObsRow, CubxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CubxObsCol = CubxObsCol + 1
+            If CubxObsCol >= 114 Then
+                CubxObsCol = 106
+                CubxObsRow = CubxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CubLoop = ObservationsNum Then GoTo SkipCubLoop
+    Next CubLoop
+End With
+SkipCubLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Pic_Obs_ini()
+'Dim PicxObsCol As Long, PicxObsRow As Long, PicLoop As Long
+'Col = 46 - 64
+'Row = 43 - 67
+With sh_Map
+    For PicLoop = 1 To ObservationsNum
+        If PicxObsCol = 0 Then PicxObsCol = 46
+        If PicxObsRow = 0 Then PicxObsRow = 43
+        If PicxObsRow = 68 Then
+            MsgBox "No more space for PickTower Observations"
+            GoTo SkipPicLoop
+        End If
+        TopObsPos = .Range(PicxObsRow & ":" & PicxObsRow).Top
+        LeftObsPos = .Cells(PicxObsRow, PicxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            PicxObsCol = PicxObsCol + 1
+            If PicxObsCol >= 65 Then
+                PicxObsCol = 46
+                PicxObsRow = PicxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If PicLoop = ObservationsNum Then GoTo SkipPicLoop
+    Next PicLoop
+End With
+SkipPicLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Amv_Obs_ini()
+'Dim AmvxObsCol As Long, AmvxObsRow As Long, AmvLoop As Long
+'Col = 95 - 113
+'Row = 14 - 24
+With sh_Map
+    For AmvLoop = 1 To ObservationsNum
+        If AmvxObsCol = 0 Then AmvxObsCol = 95
+        If AmvxObsRow = 0 Then AmvxObsRow = 14
+        If AmvxObsRow = 25 Then
+            MsgBox "No more space for Amazon Vendorflex Observations"
+            GoTo SkipAmvLoop
+        End If
+        TopObsPos = .Range(AmvxObsRow & ":" & AmvxObsRow).Top
+        LeftObsPos = .Cells(AmvxObsRow, AmvxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            AmvxObsCol = AmvxObsCol + 1
+            If AmvxObsCol >= 114 Then
+                AmvxObsCol = 95
+                AmvxObsRow = AmvxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If AmvLoop = ObservationsNum Then GoTo SkipAmvLoop
+    Next AmvLoop
+End With
+SkipAmvLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub QA_Obs_ini()
+'Dim QAxObsCol As Long, QAxObsRow As Long, QALoop As Long
+'Col = 26 - 43
+'Row = 50 - 54
+With sh_Map
+    For QALoop = 1 To ObservationsNum
+        If QAxObsCol = 0 Then QAxObsCol = 26
+        If QAxObsRow = 0 Then QAxObsRow = 50
+        If QAxObsRow = 55 Then
+            MsgBox "No more space for QA Area Observations"
+            GoTo SkipQALoop
+        End If
+        TopObsPos = .Range(QAxObsRow & ":" & QAxObsRow).Top
+        LeftObsPos = .Cells(QAxObsRow, QAxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            QAxObsCol = QAxObsCol + 1
+            If QAxObsCol >= 44 Then
+                QAxObsCol = 26
+                QAxObsRow = QAxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If QALoop = ObservationsNum Then GoTo SkipQALoop
+    Next QALoop
+End With
+SkipQALoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Off_Obs_ini()
+'Dim OffxObsCol As Long, OffxObsRow As Long, OffLoop As Long
+'Col = 146 - 165
+'Row = 63 - 66
+With sh_Map
+    For OffLoop = 1 To ObservationsNum
+        If OffxObsCol = 0 Then OffxObsCol = 146
+        If OffxObsRow = 0 Then OffxObsRow = 63
+        If OffxObsRow = 67 Then
+            MsgBox "No more space for Offices Observations"
+            GoTo SkipOffLoop
+        End If
+        TopObsPos = .Range(OffxObsRow & ":" & OffxObsRow).Top
+        LeftObsPos = .Cells(OffxObsRow, OffxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            OffxObsCol = OffxObsCol + 1
+            If OffxObsCol >= 166 Then
+                OffxObsCol = 146
+                OffxObsRow = OffxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If OffLoop = ObservationsNum Then GoTo SkipOffLoop
+    Next OffLoop
+End With
+SkipOffLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Ref_Obs_ini()
+'Dim RefxObsCol As Long, RefxObsRow As Long, RefLoop As Long
+'Col = 26 - 43
+'Row = 62 - 67
+With sh_Map
+    For RefLoop = 1 To ObservationsNum
+        If RefxObsCol = 0 Then RefxObsCol = 26
+        If RefxObsRow = 0 Then RefxObsRow = 62
+        If RefxObsRow = 68 Then
+            MsgBox "No more space for Reflex Pack Benches Observations"
+            GoTo SkipRefLoop
+        End If
+        TopObsPos = .Range(RefxObsRow & ":" & RefxObsRow).Top
+        LeftObsPos = .Cells(RefxObsRow, RefxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            RefxObsCol = RefxObsCol + 1
+            If RefxObsCol >= 44 Then
+                RefxObsCol = 26
+                RefxObsRow = RefxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If RefLoop = ObservationsNum Then GoTo SkipRefLoop
+    Next RefLoop
+End With
+SkipRefLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Tvs_Obs_ini()
+'Dim TvsxObsCol As Long, TvsxObsRow As Long, TvsLoop As Long
+'Col = 43 - 92
+'Row = 14 - 24
+With sh_Map
+    For TvsLoop = 1 To ObservationsNum
+        If TvsxObsCol = 0 Then TvsxObsCol = 43
+        If TvsxObsRow = 0 Then TvsxObsRow = 14
+        If TvsxObsRow = 25 Then
+            MsgBox "No more space for TVs bulk area Observations"
+            GoTo SkipTvsLoop
+        End If
+        TopObsPos = .Range(TvsxObsRow & ":" & TvsxObsRow).Top
+        LeftObsPos = .Cells(TvsxObsRow, TvsxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            TvsxObsCol = TvsxObsCol + 1
+            If TvsxObsCol >= 93 Then
+                TvsxObsCol = 43
+                TvsxObsRow = TvsxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If TvsLoop = ObservationsNum Then GoTo SkipTvsLoop
+    Next TvsLoop
+End With
+SkipTvsLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Pall_Obs_ini()
+'Dim PalxObsCol As Long, PalxObsRow As Long, PalLoop As Long
+'Col = 9 - 23
+'Row = 62 - 67
+With sh_Map
+    For PalLoop = 1 To ObservationsNum
+        If PalxObsCol = 0 Then PalxObsCol = 9
+        If PalxObsRow = 0 Then PalxObsRow = 62
+        If PalxObsRow = 68 Then
+            MsgBox "No more space for Pallnet Observations"
+            GoTo SkipPalLoop
+        End If
+        TopObsPos = .Range(PalxObsRow & ":" & PalxObsRow).Top
+        LeftObsPos = .Cells(PalxObsRow, PalxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            PalxObsCol = PalxObsCol + 1
+            If PalxObsCol >= 24 Then
+                PalxObsCol = 9
+                PalxObsRow = PalxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If PalLoop = ObservationsNum Then GoTo SkipPalLoop
+    Next PalLoop
+End With
+SkipPalLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Ama_Obs_ini()
+'Dim AmaxObsCol As Long, AmaxObsRow As Long, AmaLoop As Long
+'Col = 153 - 176
+'Row = 46 - 54
+With sh_Map
+    For AmaLoop = 1 To ObservationsNum
+        If AmaxObsCol = 0 Then AmaxObsCol = 153
+        If AmaxObsRow = 0 Then AmaxObsRow = 46
+        If AmaxObsRow = 55 Then
+            MsgBox "No more space for Amazon Observations"
+            GoTo SkipAmaLoop
+        End If
+        TopObsPos = .Range(AmaxObsRow & ":" & AmaxObsRow).Top
+        LeftObsPos = .Cells(AmaxObsRow, AmaxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            AmaxObsCol = AmaxObsCol + 1
+            If AmaxObsCol >= 177 Then
+                AmaxObsCol = 153
+                AmaxObsRow = AmaxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If AmaLoop = ObservationsNum Then GoTo SkipAmaLoop
+    Next AmaLoop
+End With
+SkipAmaLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Man_Obs_ini()
+'Dim ManxObsCol As Long, ManxObsRow As Long, ManLoop As Long
+'Col = 116 - 125
+'Row = 70 - 79
+With sh_Map
+    For ManLoop = 1 To ObservationsNum
+        If ManxObsCol = 0 Then ManxObsCol = 116
+        If ManxObsRow = 0 Then ManxObsRow = 70
+        If ManxObsRow = 80 Then
+            MsgBox "No more space for Managers Office Observations"
+            GoTo SkipManLoop
+        End If
+        TopObsPos = .Range(ManxObsRow & ":" & ManxObsRow).Top
+        LeftObsPos = .Cells(ManxObsRow, ManxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            ManxObsCol = ManxObsCol + 1
+            If ManxObsCol >= 126 Then
+                ManxObsCol = 116
+                ManxObsRow = ManxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If ManLoop = ObservationsNum Then GoTo SkipManLoop
+    Next ManLoop
+End With
+SkipManLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub All_Obs_ini()
+'Dim AllxObsCol As Long, AllxObsRow As Long, AllLoop As Long
+'Col = 158 - 205
+'Row = 76 - 79
+With sh_Map
+    For AllLoop = 1 To ObservationsNum
+        If AllxObsCol = 0 Then AllxObsCol = 158
+        If AllxObsRow = 0 Then AllxObsRow = 76
+        If AllxObsRow = 80 Then
+            MsgBox "No more space for All other Locations Observations"
+            GoTo SkipAllLoop
+        End If
+        TopObsPos = .Range(AllxObsRow & ":" & AllxObsRow).Top
+        LeftObsPos = .Cells(AllxObsRow, AllxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            AllxObsCol = AllxObsCol + 1
+            If AllxObsCol >= 206 Then
+                AllxObsCol = 158
+                AllxObsRow = AllxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If AllLoop = ObservationsNum Then GoTo SkipAllLoop
+    Next AllLoop
+End With
+SkipAllLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Car_Obs_ini()
+'Dim CarxObsCol As Long, CarxObsRow As Long, CarLoop As Long
+'Col = 173 - 192
+'Row = 63 - 66
+With sh_Map
+    For CarLoop = 1 To ObservationsNum
+        If CarxObsCol = 0 Then CarxObsCol = 173
+        If CarxObsRow = 0 Then CarxObsRow = 63
+        If CarxObsRow = 67 Then
+            MsgBox "No more space for Car Park Observations"
+            GoTo SkipCarLoop
+        End If
+        TopObsPos = .Range(CarxObsRow & ":" & CarxObsRow).Top
+        LeftObsPos = .Cells(CarxObsRow, CarxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CarxObsCol = CarxObsCol + 1
+            If CarxObsCol >= 193 Then
+                CarxObsCol = 173
+                CarxObsRow = CarxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CarLoop = ObservationsNum Then GoTo SkipCarLoop
+    Next CarLoop
+End With
+SkipCarLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Can_Obs_ini()
+'Dim CanxObsCol As Long, CanxObsRow As Long, CanLoop As Long
+'Col = 173 - 186
+'Row = 12 - 15
+With sh_Map
+    For CanLoop = 1 To ObservationsNum
+        If CanxObsCol = 0 Then CanxObsCol = 173
+        If CanxObsRow = 0 Then CanxObsRow = 12
+        If CanxObsRow = 16 Then
+            MsgBox "No more space for Canteen Observations"
+            GoTo SkipCanLoop
+        End If
+        TopObsPos = .Range(CanxObsRow & ":" & CanxObsRow).Top
+        LeftObsPos = .Cells(CanxObsRow, CanxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CanxObsCol = CanxObsCol + 1
+            If CanxObsCol >= 187 Then
+                CanxObsCol = 173
+                CanxObsRow = CanxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CanLoop = ObservationsNum Then GoTo SkipCanLoop
+    Next CanLoop
+End With
+SkipCanLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Dhl_Obs_ini()
+'Dim DhlxObsCol As Long, DhlxObsRow As Long, DhlLoop As Long
+'Col = 9 - 23
+'Row = 33 - 40
+With sh_Map
+    For DhlLoop = 1 To ObservationsNum
+        If DhlxObsCol = 0 Then DhlxObsCol = 9
+        If DhlxObsRow = 0 Then DhlxObsRow = 33
+        If DhlxObsRow = 41 Then
+            MsgBox "No more space for DHL Observations"
+            GoTo SkipDhlLoop
+        End If
+        TopObsPos = .Range(DhlxObsRow & ":" & DhlxObsRow).Top
+        LeftObsPos = .Cells(DhlxObsRow, DhlxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            DhlxObsCol = DhlxObsCol + 1
+            If DhlxObsCol >= 24 Then
+                DhlxObsCol = 9
+                DhlxObsRow = DhlxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If DhlLoop = ObservationsNum Then GoTo SkipDhlLoop
+    Next DhlLoop
+End With
+SkipDhlLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Mhe_Obs_ini()
+'Dim MhexObsCol As Long, MhexObsRow As Long, MheLoop As Long
+'Col = 116 - 125
+'Row = 14 - 40
+With sh_Map
+    For MheLoop = 1 To ObservationsNum
+        If MhexObsCol = 0 Then MhexObsCol = 116
+        If MhexObsRow = 0 Then MhexObsRow = 14
+        If MhexObsRow = 41 Then
+            MsgBox "No more space for MHE Area Observations"
+            GoTo SkipMheLoop
+        End If
+        TopObsPos = .Range(MhexObsRow & ":" & MhexObsRow).Top
+        LeftObsPos = .Cells(MhexObsRow, MhexObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            MhexObsCol = MhexObsCol + 1
+            If MhexObsCol >= 126 Then
+                MhexObsCol = 116
+                MhexObsRow = MhexObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If MheLoop = ObservationsNum Then GoTo SkipMheLoop
+    Next MheLoop
+End With
+SkipMheLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Pl_Obs_ini()
+'Dim PlxObsCol As Long, PlxObsRow As Long, PlLoop As Long
+'Col = 9 - 23
+'Row = 48 - 54
+With sh_Map
+    For PlLoop = 1 To ObservationsNum
+        If PlxObsCol = 0 Then PlxObsCol = 9
+        If PlxObsRow = 0 Then PlxObsRow = 48
+        If PlxObsRow = 55 Then
+            MsgBox "No more space for 3 PL Observations"
+            GoTo SkipPlLoop
+        End If
+        TopObsPos = .Range(PlxObsRow & ":" & PlxObsRow).Top
+        LeftObsPos = .Cells(PlxObsRow, PlxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            PlxObsCol = PlxObsCol + 1
+            If PlxObsCol >= 24 Then
+                PlxObsCol = 9
+                PlxObsRow = PlxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If PlLoop = ObservationsNum Then GoTo SkipPlLoop
+    Next PlLoop
+End With
+SkipPlLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Out_Obs_ini()
+'Dim OutxObsCol As Long, OutxObsRow As Long, OutLoop As Long
+'Col = 26 - 64
+'Row = 74 - 79
+With sh_Map
+    For OutLoop = 1 To ObservationsNum
+        If OutxObsCol = 0 Then OutxObsCol = 26
+        If OutxObsRow = 0 Then OutxObsRow = 74
+        If OutxObsRow = 80 Then
+            MsgBox "No more space for Outbound Observations"
+            GoTo SkipOutLoop
+        End If
+        TopObsPos = .Range(OutxObsRow & ":" & OutxObsRow).Top
+        LeftObsPos = .Cells(OutxObsRow, OutxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            OutxObsCol = OutxObsCol + 1
+            If OutxObsCol >= 65 Then
+                OutxObsCol = 26
+                OutxObsRow = OutxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If OutLoop = ObservationsNum Then GoTo SkipOutLoop
+    Next OutLoop
+End With
+SkipOutLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub End_Obs_ini()
+'Dim EndxObsCol As Long, EndxObsRow As Long, EndLoop As Long
+'Col = 9 - 23
+'Row = 74 - 79
+With sh_Map
+    For EndLoop = 1 To ObservationsNum
+        If EndxObsCol = 0 Then EndxObsCol = 9
+        If EndxObsRow = 0 Then EndxObsRow = 74
+        If EndxObsRow = 80 Then
+            MsgBox "No more space for End Bays Observations"
+            GoTo SkipEndLoop
+        End If
+        TopObsPos = .Range(EndxObsRow & ":" & EndxObsRow).Top
+        LeftObsPos = .Cells(EndxObsRow, EndxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            EndxObsCol = EndxObsCol + 1
+            If EndxObsCol >= 24 Then
+                EndxObsCol = 9
+                EndxObsRow = EndxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If EndLoop = ObservationsNum Then GoTo SkipEndLoop
+    Next EndLoop
+End With
+SkipEndLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Ser_Obs_ini()
+'Dim SerxObsCol As Long, SerxObsRow As Long, SerLoop As Long
+'Col = 129 - 146
+'Row = 25 - 26
+With sh_Map
+    For SerLoop = 1 To ObservationsNum
+        If SerxObsCol = 0 Then SerxObsCol = 129
+        If SerxObsRow = 0 Then SerxObsRow = 25
+        If SerxObsRow = 27 Then
+            MsgBox "No more space for Service Centre Observations"
+            GoTo SkipSerLoop
+        End If
+        TopObsPos = .Range(SerxObsRow & ":" & SerxObsRow).Top
+        LeftObsPos = .Cells(SerxObsRow, SerxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            SerxObsCol = SerxObsCol + 1
+            If SerxObsCol >= 147 Then
+                SerxObsCol = 129
+                SerxObsRow = SerxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If SerLoop = ObservationsNum Then GoTo SkipSerLoop
+    Next SerLoop
+End With
+SkipSerLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Yar_Obs_ini()
+'Dim YarxObsCol As Long, YarxObsRow As Long, YarLoop As Long
+'Col = 130 - 149
+'Row = 76 - 79
+With sh_Map
+    For YarLoop = 1 To ObservationsNum
+        If YarxObsCol = 0 Then YarxObsCol = 130
+        If YarxObsRow = 0 Then YarxObsRow = 76
+        If YarxObsRow = 80 Then
+            MsgBox "No more space for Yard Observations"
+            GoTo SkipYarLoop
+        End If
+        TopObsPos = .Range(YarxObsRow & ":" & YarxObsRow).Top
+        LeftObsPos = .Cells(YarxObsRow, YarxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            YarxObsCol = YarxObsCol + 1
+            If YarxObsCol >= 150 Then
+                YarxObsCol = 130
+                YarxObsRow = YarxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If YarLoop = ObservationsNum Then GoTo SkipYarLoop
+    Next YarLoop
+End With
+SkipYarLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Rec_Obs_ini()
+'Dim RecxObsCol As Long, RecxObsRow As Long, RecLoop As Long
+'Col = 196 - 209
+'Row = 12 - 15
+With sh_Map
+    For RecLoop = 1 To ObservationsNum
+        If RecxObsCol = 0 Then RecxObsCol = 196
+        If RecxObsRow = 0 Then RecxObsRow = 12
+        If RecxObsRow = 16 Then
+            MsgBox "No more space for Reception Observations"
+            GoTo SkipRecLoop
+        End If
+        TopObsPos = .Range(RecxObsRow & ":" & RecxObsRow).Top
+        LeftObsPos = .Cells(RecxObsRow, RecxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            RecxObsCol = RecxObsCol + 1
+            If RecxObsCol >= 210 Then
+                RecxObsCol = 196
+                RecxObsRow = RecxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If RecLoop = ObservationsNum Then GoTo SkipRecLoop
+    Next RecLoop
+End With
+SkipRecLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Sec_Obs_ini()
+'Dim SecxObsCol As Long, SecxObsRow As Long, SecLoop As Long
+'Col = 150 - 163
+'Row = 12 - 15
+With sh_Map
+    For SecLoop = 1 To ObservationsNum
+        If SecxObsCol = 0 Then SecxObsCol = 150
+        If SecxObsRow = 0 Then SecxObsRow = 12
+        If SecxObsRow = 16 Then
+            MsgBox "No more space for Security area Observations"
+            GoTo SkipSecLoop
+        End If
+        TopObsPos = .Range(SecxObsRow & ":" & SecxObsRow).Top
+        LeftObsPos = .Cells(SecxObsRow, SecxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            SecxObsCol = SecxObsCol + 1
+            If SecxObsCol >= 164 Then
+                SecxObsCol = 150
+                SecxObsRow = SecxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If SecLoop = ObservationsNum Then GoTo SkipSecLoop
+    Next SecLoop
+End With
+SkipSecLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Sid_Obs_ini()
+'Dim SidxObsCol As Long, SidxObsRow As Long, SidLoop As Long
+'Col = 6 - 7
+'Row = 49 - 67
+With sh_Map
+    For SidLoop = 1 To ObservationsNum
+        If SidxObsCol = 0 Then SidxObsCol = 6
+        If SidxObsRow = 0 Then SidxObsRow = 49
+        If SidxObsRow = 16 Then
+            MsgBox "No more space for Side Racking Observations"
+            GoTo SkipSidLoop
+        End If
+        TopObsPos = .Range(SidxObsRow & ":" & SidxObsRow).Top
+        LeftObsPos = .Cells(SidxObsRow, SidxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            SidxObsCol = SidxObsCol + 1
+            If SidxObsCol >= 8 Then
+                SidxObsCol = 6
+                SidxObsRow = SidxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If SidLoop = ObservationsNum Then GoTo SkipSidLoop
+    Next SidLoop
+End With
+SkipSidLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+End Sub
+Sub Loc_Obs_ini()
+'Dim LocxObsCol As Long, LocxObsRow As Long, LocLoop As Long
+'Col = 129 - 142
+'Row = 12 - 15
+With sh_Map
+    For LocLoop = 1 To ObservationsNum
+        If LocxObsCol = 0 Then LocxObsCol = 129
+        If LocxObsRow = 0 Then LocxObsRow = 12
+        If LocxObsRow = 16 Then
+            MsgBox "No more space for Lockers Observations"
+            GoTo SkipLocLoop
+        End If
+        TopObsPos = .Range(LocxObsRow & ":" & LocxObsRow).Top
+        LeftObsPos = .Cells(LocxObsRow, LocxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            LocxObsCol = LocxObsCol + 1
+            If LocxObsCol >= 143 Then
+                LocxObsCol = 129
+                LocxObsRow = LocxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If LocLoop = ObservationsNum Then GoTo SkipLocLoop
+    Next LocLoop
+End With
+SkipLocLoop:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Month
+
+End Sub
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''                        '''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''' Main Loop for the year '''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''                        '''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+Sub Observations_MainLoop_Year()
+With Sheet2
+
+Call Delete_hidden_shapes
+    
+    If NewShapeIDNum = 0 Then NewShapeIDNum = 1
+    ObservationDatetoRow = Sheet1.Range("C3").Value + 2 '12x (Years)
+    CheckIfNoValue = WorksheetFunction.Sum(.Range(.Cells(ObservationDatetoRow, 39), .Cells(ObservationDatetoRow, 72)))
+    If CheckIfNoValue = 0 Then
+    Sheet1.Range("C18").Value = CheckIfNoValue
+        MsgBox "There are no data for selected year"
+        End
+    End If
+        Sheet1.Range("C18").Value = CheckIfNoValue
+NextMainForLoopY:
+        'For MainObsLoop = 39 To 72
+        If MainObsLoop = 0 Then MainObsLoop = 39
+        If MainObsLoop = 73 Then Exit Sub
+            ObservationsNum = Sheet2.Cells(ObservationDatetoRow, MainObsLoop).Value
+            
+            If MainObsLoop = 39 Then
+                Call Fac_Obs_ini_Year
+            End If
+            
+            If MainObsLoop = 40 Then
+                Call Nar_Obs_ini_Year
+            End If
+                  
+            If MainObsLoop = 41 Then
+                Call Goo_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 42 Then
+                Call Ret_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 43 Then
+                Call Arg_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 44 Then
+                Call Bun_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 45 Then
+                Call Cor_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 46 Then
+                Call Mob_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 47 Then
+                Call Res_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 48 Then
+                Call Wid_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 49 Then
+                Call Cub_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 50 Then
+                Call Pic_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 51 Then
+                Call Amv_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 52 Then
+                Call QA_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 53 Then
+                Call Off_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 54 Then
+                Call Ref_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 55 Then
+                Call Tvs_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 56 Then
+                Call Pall_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 57 Then
+                Call Ama_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 58 Then
+                Call Man_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 59 Then
+                Call All_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 60 Then
+                Call Car_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 61 Then
+                Call Can_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 62 Then
+                Call Dhl_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 63 Then
+                Call Mhe_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 64 Then
+                Call Pl_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 65 Then
+                Call Out_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 66 Then
+                Call End_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 67 Then
+                Call Ser_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 68 Then
+                Call Yar_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 69 Then
+                Call Rec_Obs_ini_Year
+            End If
+                        
+            If MainObsLoop = 70 Then
+                Call Sec_Obs_ini_Year
+            End If
+                                    
+            If MainObsLoop = 71 Then
+                Call Sid_Obs_ini_Year
+            End If
+                                    
+            If MainObsLoop = 72 Then
+                Call Loc_Obs_ini_Year
+            End If
+            
+        'Next MainObsLoop
+End With
+End Sub
+Sub Fac_Obs_ini_Year()
+'Dim FacxObsCol As Long, FacxObsRow As Long, FacLoop As Long
+'Col = 116 - 125
+'Row = 48 - 59
+With sh_Map
+    For FacLoop = 1 To ObservationsNum
+        If FacxObsCol = 0 Then FacxObsCol = 116
+        If FacxObsRow = 0 Then FacxObsRow = 48
+        If FacxObsRow = 60 Then
+            MsgBox "No more space for Facilities Observations"
+            GoTo SkipFacLoopY
+        End If
+        TopObsPos = .Range(FacxObsRow & ":" & FacxObsRow).Top
+        LeftObsPos = .Cells(FacxObsRow, FacxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            FacxObsCol = FacxObsCol + 1
+            If FacxObsCol >= 126 Then
+                FacxObsCol = 116
+                FacxObsRow = FacxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If FacLoop = ObservationsNum Then GoTo SkipFacLoopY
+    Next FacLoop
+End With
+SkipFacLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Nar_Obs_ini_Year()
+'Dim NarxObsCol As Long, NarxObsRow As Long, NarLoop As Long
+'Col = 67 - 113
+'Row = 34 - 67
+With sh_Map
+    For NarLoop = 1 To ObservationsNum
+        If NarxObsCol = 0 Then NarxObsCol = 67
+        If NarxObsRow = 0 Then NarxObsRow = 34
+        If NarxObsRow = 68 Then
+            MsgBox "No more space for Wide Aisle Observations"
+            GoTo SkipNarLoopY
+        End If
+        TopObsPos = .Range(NarxObsRow & ":" & NarxObsRow).Top
+        LeftObsPos = .Cells(NarxObsRow, NarxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            NarxObsCol = NarxObsCol + 1
+            If NarxObsCol >= 114 Then
+                NarxObsCol = 67
+                NarxObsRow = NarxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If NarLoop = ObservationsNum Then GoTo SkipNarLoopY
+    Next NarLoop
+End With
+SkipNarLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Goo_Obs_ini_Year()
+'Dim GooxObsCol As Long, GooxObsRow As Long, GooLoop As Long
+'Col = 67 - 103
+'Row = 74 - 79
+With sh_Map
+    For GooLoop = 1 To ObservationsNum
+        If GooxObsCol = 0 Then GooxObsCol = 67
+        If GooxObsRow = 0 Then GooxObsRow = 74
+        If GooxObsRow = 80 Then
+            MsgBox "No more space for Goods In Observations"
+            GoTo SkipGooLoopY
+        End If
+        TopObsPos = .Range(GooxObsRow & ":" & GooxObsRow).Top
+        LeftObsPos = .Cells(GooxObsRow, GooxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            GooxObsCol = GooxObsCol + 1
+            If GooxObsCol >= 104 Then
+                GooxObsCol = 67
+                GooxObsRow = GooxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If GooLoop = ObservationsNum Then GoTo SkipGooLoopY
+    Next GooLoop
+End With
+SkipGooLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Ret_Obs_ini_Year()
+'Dim RetxObsCol As Long, RetxObsRow As Long, RetLoop As Long
+'Col = 149 - 166
+'Row = 25 - 26
+With sh_Map
+    For RetLoop = 1 To ObservationsNum
+        If RetxObsCol = 0 Then RetxObsCol = 149
+        If RetxObsRow = 0 Then RetxObsRow = 25
+        If RetxObsRow = 27 Then
+            MsgBox "No more space for Returns 1st Floor Observations"
+            GoTo SkipRetLoopY
+        End If
+        TopObsPos = .Range(RetxObsRow & ":" & RetxObsRow).Top
+        LeftObsPos = .Cells(RetxObsRow, RetxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            RetxObsCol = RetxObsCol + 1
+            If RetxObsCol >= 167 Then
+                RetxObsCol = 149
+                RetxObsRow = RetxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If RetLoop = ObservationsNum Then GoTo SkipRetLoopY
+    Next RetLoop
+End With
+SkipRetLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Arg_Obs_ini_Year()
+'Dim ArgxObsCol As Long, ArgxObsRow As Long, ArgLoop As Long
+'Col = 183 - 206
+'Row = 46 - 54
+With sh_Map
+    For ArgLoop = 1 To ObservationsNum
+        If ArgxObsCol = 0 Then ArgxObsCol = 183
+        If ArgxObsRow = 0 Then ArgxObsRow = 46
+        If ArgxObsRow = 55 Then
+            MsgBox "No more space for Argos Observations"
+            GoTo SkipArgLoopY
+        End If
+        TopObsPos = .Range(ArgxObsRow & ":" & ArgxObsRow).Top
+        LeftObsPos = .Cells(ArgxObsRow, ArgxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            ArgxObsCol = ArgxObsCol + 1
+            If ArgxObsCol >= 207 Then
+                ArgxObsCol = 183
+                ArgxObsRow = ArgxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If ArgLoop = ObservationsNum Then GoTo SkipArgLoopY
+    Next ArgLoop
+End With
+SkipArgLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Bun_Obs_ini_Year()
+'Dim BunxObsCol As Long, BunxObsRow As Long, BunLoop As Long
+'Col = 133 - 146
+'Row = 46 - 54
+With sh_Map
+    For BunLoop = 1 To ObservationsNum
+        If BunxObsCol = 0 Then BunxObsCol = 133
+        If BunxObsRow = 0 Then BunxObsRow = 46
+        If BunxObsRow = 55 Then
+            MsgBox "No more space for Bundles Observations"
+            GoTo SkipBunLoopY
+        End If
+        TopObsPos = .Range(BunxObsRow & ":" & BunxObsRow).Top
+        LeftObsPos = .Cells(BunxObsRow, BunxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            BunxObsCol = BunxObsCol + 1
+            If BunxObsCol >= 147 Then
+                BunxObsCol = 133
+                BunxObsRow = BunxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If BunLoop = ObservationsNum Then GoTo SkipBunLoopY
+    Next BunLoop
+End With
+SkipBunLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Cor_Obs_ini_Year()
+'Dim CorxObsCol As Long, CorxObsRow As Long, CorLoop As Long
+'Col = 26 - 43
+'Row = 34 - 42
+With sh_Map
+    For CorLoop = 1 To ObservationsNum
+        If CorxObsCol = 0 Then CorxObsCol = 26
+        If CorxObsRow = 0 Then CorxObsRow = 34
+        If CorxObsRow = 43 Then
+            MsgBox "No more space for Core Observations"
+            GoTo SkipCorLoopY
+        End If
+        TopObsPos = .Range(CorxObsRow & ":" & CorxObsRow).Top
+        LeftObsPos = .Cells(CorxObsRow, CorxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CorxObsCol = CorxObsCol + 1
+            If CorxObsCol >= 44 Then
+                CorxObsCol = 26
+                CorxObsRow = CorxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CorLoop = ObservationsNum Then GoTo SkipCorLoopY
+    Next CorLoop
+End With
+SkipCorLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Mob_Obs_ini_Year()
+'Dim MobxObsCol As Long, MobxObsRow As Long, MobLoop As Long
+'Col = 182 - 197
+'Row = 28 - 32
+With sh_Map
+    For MobLoop = 1 To ObservationsNum
+        If MobxObsCol = 0 Then MobxObsCol = 182
+        If MobxObsRow = 0 Then MobxObsRow = 28
+        If MobxObsRow = 33 Then
+            MsgBox "No more space for Mobiles Observations"
+            GoTo SkipMobLoopY
+        End If
+        TopObsPos = .Range(MobxObsRow & ":" & MobxObsRow).Top
+        LeftObsPos = .Cells(MobxObsRow, MobxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            MobxObsCol = MobxObsCol + 1
+            If MobxObsCol >= 198 Then
+                MobxObsCol = 182
+                MobxObsRow = MobxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If MobLoop = ObservationsNum Then GoTo SkipMobLoopY
+    Next MobLoop
+End With
+SkipMobLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Res_Obs_ini_Year()
+'Dim ResxObsCol As Long, ResxObsRow As Long, ResLoop As Long
+'Col = 147 - 166
+'Row = 31 - 35
+With sh_Map
+    For ResLoop = 1 To ObservationsNum
+        If ResxObsCol = 0 Then ResxObsCol = 147
+        If ResxObsRow = 0 Then ResxObsRow = 31
+        If ResxObsRow = 36 Then
+            MsgBox "No more space for Returns 2nd Floor Observations"
+            GoTo SkipResLoopY
+        End If
+        TopObsPos = .Range(ResxObsRow & ":" & ResxObsRow).Top
+        LeftObsPos = .Cells(ResxObsRow, ResxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            ResxObsCol = ResxObsCol + 1
+            If ResxObsCol >= 167 Then
+                ResxObsCol = 147
+                ResxObsRow = ResxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If ResLoop = ObservationsNum Then GoTo SkipResLoopY
+    Next ResLoop
+End With
+SkipResLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Wid_Obs_ini_Year()
+'Dim WidxObsCol As Long, WidxObsRow As Long, WidLoop As Long
+'Col = 6 - 40
+'Row = 14 - 24
+With sh_Map
+    For WidLoop = 1 To ObservationsNum
+        If WidxObsCol = 0 Then WidxObsCol = 6
+        If WidxObsRow = 0 Then WidxObsRow = 14
+        If WidxObsRow = 25 Then
+            MsgBox "No more space for Wide Aisle Observations"
+            GoTo SkipWidLoopY
+        End If
+        TopObsPos = .Range(WidxObsRow & ":" & WidxObsRow).Top
+        LeftObsPos = .Cells(WidxObsRow, WidxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            WidxObsCol = WidxObsCol + 1
+            If WidxObsCol >= 41 Then
+                WidxObsCol = 6
+                WidxObsRow = WidxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If WidLoop = ObservationsNum Then GoTo SkipWidLoopY
+    Next WidLoop
+End With
+SkipWidLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Cub_Obs_ini_Year()
+'Dim CubxObsCol As Long, CubxObsRow As Long, CubLoop As Long
+'Col = 106 - 113
+'Row = 74 - 79
+With sh_Map
+    For CubLoop = 1 To ObservationsNum
+        If CubxObsCol = 0 Then CubxObsCol = 106
+        If CubxObsRow = 0 Then CubxObsRow = 74
+        If CubxObsRow = 80 Then
+            MsgBox "No more space for Cubiscan Area Observations"
+            GoTo SkipCubLoopY
+        End If
+        TopObsPos = .Range(CubxObsRow & ":" & CubxObsRow).Top
+        LeftObsPos = .Cells(CubxObsRow, CubxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CubxObsCol = CubxObsCol + 1
+            If CubxObsCol >= 114 Then
+                CubxObsCol = 106
+                CubxObsRow = CubxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CubLoop = ObservationsNum Then GoTo SkipCubLoopY
+    Next CubLoop
+End With
+SkipCubLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Pic_Obs_ini_Year()
+'Dim PicxObsCol As Long, PicxObsRow As Long, PicLoop As Long
+'Col = 46 - 64
+'Row = 43 - 67
+With sh_Map
+    For PicLoop = 1 To ObservationsNum
+        If PicxObsCol = 0 Then PicxObsCol = 46
+        If PicxObsRow = 0 Then PicxObsRow = 43
+        If PicxObsRow = 68 Then
+            MsgBox "No more space for PickTower Observations"
+            GoTo SkipPicLoopY
+        End If
+        TopObsPos = .Range(PicxObsRow & ":" & PicxObsRow).Top
+        LeftObsPos = .Cells(PicxObsRow, PicxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            PicxObsCol = PicxObsCol + 1
+            If PicxObsCol >= 65 Then
+                PicxObsCol = 46
+                PicxObsRow = PicxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If PicLoop = ObservationsNum Then GoTo SkipPicLoopY
+    Next PicLoop
+End With
+SkipPicLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Amv_Obs_ini_Year()
+'Dim AmvxObsCol As Long, AmvxObsRow As Long, AmvLoop As Long
+'Col = 95 - 113
+'Row = 14 - 24
+With sh_Map
+    For AmvLoop = 1 To ObservationsNum
+        If AmvxObsCol = 0 Then AmvxObsCol = 95
+        If AmvxObsRow = 0 Then AmvxObsRow = 14
+        If AmvxObsRow = 25 Then
+            MsgBox "No more space for Amazon Vendorflex Observations"
+            GoTo SkipAmvLoopY
+        End If
+        TopObsPos = .Range(AmvxObsRow & ":" & AmvxObsRow).Top
+        LeftObsPos = .Cells(AmvxObsRow, AmvxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            AmvxObsCol = AmvxObsCol + 1
+            If AmvxObsCol >= 114 Then
+                AmvxObsCol = 95
+                AmvxObsRow = AmvxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If AmvLoop = ObservationsNum Then GoTo SkipAmvLoopY
+    Next AmvLoop
+End With
+SkipAmvLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub QA_Obs_ini_Year()
+'Dim QAxObsCol As Long, QAxObsRow As Long, QALoop As Long
+'Col = 26 - 43
+'Row = 50 - 54
+With sh_Map
+    For QALoop = 1 To ObservationsNum
+        If QAxObsCol = 0 Then QAxObsCol = 26
+        If QAxObsRow = 0 Then QAxObsRow = 50
+        If QAxObsRow = 55 Then
+            MsgBox "No more space for QA Area Observations"
+            GoTo SkipQALoopY
+        End If
+        TopObsPos = .Range(QAxObsRow & ":" & QAxObsRow).Top
+        LeftObsPos = .Cells(QAxObsRow, QAxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            QAxObsCol = QAxObsCol + 1
+            If QAxObsCol >= 44 Then
+                QAxObsCol = 26
+                QAxObsRow = QAxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If QALoop = ObservationsNum Then GoTo SkipQALoopY
+    Next QALoop
+End With
+SkipQALoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Off_Obs_ini_Year()
+'Dim OffxObsCol As Long, OffxObsRow As Long, OffLoop As Long
+'Col = 146 - 165
+'Row = 63 - 66
+With sh_Map
+    For OffLoop = 1 To ObservationsNum
+        If OffxObsCol = 0 Then OffxObsCol = 146
+        If OffxObsRow = 0 Then OffxObsRow = 63
+        If OffxObsRow = 67 Then
+            MsgBox "No more space for Offices Observations"
+            GoTo SkipOffLoopY
+        End If
+        TopObsPos = .Range(OffxObsRow & ":" & OffxObsRow).Top
+        LeftObsPos = .Cells(OffxObsRow, OffxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            OffxObsCol = OffxObsCol + 1
+            If OffxObsCol >= 166 Then
+                OffxObsCol = 146
+                OffxObsRow = OffxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If OffLoop = ObservationsNum Then GoTo SkipOffLoopY
+    Next OffLoop
+End With
+SkipOffLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Ref_Obs_ini_Year()
+'Dim RefxObsCol As Long, RefxObsRow As Long, RefLoop As Long
+'Col = 26 - 43
+'Row = 62 - 67
+With sh_Map
+    For RefLoop = 1 To ObservationsNum
+        If RefxObsCol = 0 Then RefxObsCol = 26
+        If RefxObsRow = 0 Then RefxObsRow = 62
+        If RefxObsRow = 68 Then
+            MsgBox "No more space for Reflex Pack Benches Observations"
+            GoTo SkipRefLoopY
+        End If
+        TopObsPos = .Range(RefxObsRow & ":" & RefxObsRow).Top
+        LeftObsPos = .Cells(RefxObsRow, RefxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            RefxObsCol = RefxObsCol + 1
+            If RefxObsCol >= 44 Then
+                RefxObsCol = 26
+                RefxObsRow = RefxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If RefLoop = ObservationsNum Then GoTo SkipRefLoopY
+    Next RefLoop
+End With
+SkipRefLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Tvs_Obs_ini_Year()
+'Dim TvsxObsCol As Long, TvsxObsRow As Long, TvsLoop As Long
+'Col = 43 - 92
+'Row = 14 - 24
+With sh_Map
+    For TvsLoop = 1 To ObservationsNum
+        If TvsxObsCol = 0 Then TvsxObsCol = 43
+        If TvsxObsRow = 0 Then TvsxObsRow = 14
+        If TvsxObsRow = 25 Then
+            MsgBox "No more space for TVs bulk area Observations"
+            GoTo SkipTvsLoopY
+        End If
+        TopObsPos = .Range(TvsxObsRow & ":" & TvsxObsRow).Top
+        LeftObsPos = .Cells(TvsxObsRow, TvsxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            TvsxObsCol = TvsxObsCol + 1
+            If TvsxObsCol >= 93 Then
+                TvsxObsCol = 43
+                TvsxObsRow = TvsxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If TvsLoop = ObservationsNum Then GoTo SkipTvsLoopY
+    Next TvsLoop
+End With
+SkipTvsLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Pall_Obs_ini_Year()
+'Dim PalxObsCol As Long, PalxObsRow As Long, PalLoop As Long
+'Col = 9 - 23
+'Row = 62 - 67
+With sh_Map
+    For PalLoop = 1 To ObservationsNum
+        If PalxObsCol = 0 Then PalxObsCol = 9
+        If PalxObsRow = 0 Then PalxObsRow = 62
+        If PalxObsRow = 68 Then
+            MsgBox "No more space for Pallnet Observations"
+            GoTo SkipPalLoopY
+        End If
+        TopObsPos = .Range(PalxObsRow & ":" & PalxObsRow).Top
+        LeftObsPos = .Cells(PalxObsRow, PalxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            PalxObsCol = PalxObsCol + 1
+            If PalxObsCol >= 24 Then
+                PalxObsCol = 9
+                PalxObsRow = PalxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If PalLoop = ObservationsNum Then GoTo SkipPalLoopY
+    Next PalLoop
+End With
+SkipPalLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Ama_Obs_ini_Year()
+'Dim AmaxObsCol As Long, AmaxObsRow As Long, AmaLoop As Long
+'Col = 153 - 176
+'Row = 46 - 54
+With sh_Map
+    For AmaLoop = 1 To ObservationsNum
+        If AmaxObsCol = 0 Then AmaxObsCol = 153
+        If AmaxObsRow = 0 Then AmaxObsRow = 46
+        If AmaxObsRow = 55 Then
+            MsgBox "No more space for Amazon Observations"
+            GoTo SkipAmaLoopY
+        End If
+        TopObsPos = .Range(AmaxObsRow & ":" & AmaxObsRow).Top
+        LeftObsPos = .Cells(AmaxObsRow, AmaxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            AmaxObsCol = AmaxObsCol + 1
+            If AmaxObsCol >= 177 Then
+                AmaxObsCol = 153
+                AmaxObsRow = AmaxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If AmaLoop = ObservationsNum Then GoTo SkipAmaLoopY
+    Next AmaLoop
+End With
+SkipAmaLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Man_Obs_ini_Year()
+'Dim ManxObsCol As Long, ManxObsRow As Long, ManLoop As Long
+'Col = 116 - 125
+'Row = 70 - 79
+With sh_Map
+    For ManLoop = 1 To ObservationsNum
+        If ManxObsCol = 0 Then ManxObsCol = 116
+        If ManxObsRow = 0 Then ManxObsRow = 70
+        If ManxObsRow = 80 Then
+            MsgBox "No more space for Managers Office Observations"
+            GoTo SkipManLoopY
+        End If
+        TopObsPos = .Range(ManxObsRow & ":" & ManxObsRow).Top
+        LeftObsPos = .Cells(ManxObsRow, ManxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            ManxObsCol = ManxObsCol + 1
+            If ManxObsCol >= 126 Then
+                ManxObsCol = 116
+                ManxObsRow = ManxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If ManLoop = ObservationsNum Then GoTo SkipManLoopY
+    Next ManLoop
+End With
+SkipManLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub All_Obs_ini_Year()
+'Dim AllxObsCol As Long, AllxObsRow As Long, AllLoop As Long
+'Col = 158 - 205
+'Row = 76 - 79
+With sh_Map
+    For AllLoop = 1 To ObservationsNum
+        If AllxObsCol = 0 Then AllxObsCol = 158
+        If AllxObsRow = 0 Then AllxObsRow = 76
+        If AllxObsRow = 80 Then
+            MsgBox "No more space for All other Locations Observations"
+            GoTo SkipAllLoopY
+        End If
+        TopObsPos = .Range(AllxObsRow & ":" & AllxObsRow).Top
+        LeftObsPos = .Cells(AllxObsRow, AllxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            AllxObsCol = AllxObsCol + 1
+            If AllxObsCol >= 206 Then
+                AllxObsCol = 158
+                AllxObsRow = AllxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If AllLoop = ObservationsNum Then GoTo SkipAllLoopY
+    Next AllLoop
+End With
+SkipAllLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Car_Obs_ini_Year()
+'Dim CarxObsCol As Long, CarxObsRow As Long, CarLoop As Long
+'Col = 173 - 192
+'Row = 63 - 66
+With sh_Map
+    For CarLoop = 1 To ObservationsNum
+        If CarxObsCol = 0 Then CarxObsCol = 173
+        If CarxObsRow = 0 Then CarxObsRow = 63
+        If CarxObsRow = 67 Then
+            MsgBox "No more space for Car Park Observations"
+            GoTo SkipCarLoopY
+        End If
+        TopObsPos = .Range(CarxObsRow & ":" & CarxObsRow).Top
+        LeftObsPos = .Cells(CarxObsRow, CarxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CarxObsCol = CarxObsCol + 1
+            If CarxObsCol >= 193 Then
+                CarxObsCol = 173
+                CarxObsRow = CarxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CarLoop = ObservationsNum Then GoTo SkipCarLoopY
+    Next CarLoop
+End With
+SkipCarLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Can_Obs_ini_Year()
+'Dim CanxObsCol As Long, CanxObsRow As Long, CanLoop As Long
+'Col = 173 - 186
+'Row = 12 - 15
+With sh_Map
+    For CanLoop = 1 To ObservationsNum
+        If CanxObsCol = 0 Then CanxObsCol = 173
+        If CanxObsRow = 0 Then CanxObsRow = 12
+        If CanxObsRow = 16 Then
+            MsgBox "No more space for Canteen Observations"
+            GoTo SkipCanLoopY
+        End If
+        TopObsPos = .Range(CanxObsRow & ":" & CanxObsRow).Top
+        LeftObsPos = .Cells(CanxObsRow, CanxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            CanxObsCol = CanxObsCol + 1
+            If CanxObsCol >= 187 Then
+                CanxObsCol = 173
+                CanxObsRow = CanxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If CanLoop = ObservationsNum Then GoTo SkipCanLoopY
+    Next CanLoop
+End With
+SkipCanLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Dhl_Obs_ini_Year()
+'Dim DhlxObsCol As Long, DhlxObsRow As Long, DhlLoop As Long
+'Col = 9 - 23
+'Row = 33 - 40
+With sh_Map
+    For DhlLoop = 1 To ObservationsNum
+        If DhlxObsCol = 0 Then DhlxObsCol = 9
+        If DhlxObsRow = 0 Then DhlxObsRow = 33
+        If DhlxObsRow = 41 Then
+            MsgBox "No more space for DHL Observations"
+            GoTo SkipDhlLoopY
+        End If
+        TopObsPos = .Range(DhlxObsRow & ":" & DhlxObsRow).Top
+        LeftObsPos = .Cells(DhlxObsRow, DhlxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            DhlxObsCol = DhlxObsCol + 1
+            If DhlxObsCol >= 24 Then
+                DhlxObsCol = 9
+                DhlxObsRow = DhlxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If DhlLoop = ObservationsNum Then GoTo SkipDhlLoopY
+    Next DhlLoop
+End With
+SkipDhlLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Mhe_Obs_ini_Year()
+'Dim MhexObsCol As Long, MhexObsRow As Long, MheLoop As Long
+'Col = 116 - 125
+'Row = 14 - 40
+With sh_Map
+    For MheLoop = 1 To ObservationsNum
+        If MhexObsCol = 0 Then MhexObsCol = 116
+        If MhexObsRow = 0 Then MhexObsRow = 14
+        If MhexObsRow = 41 Then
+            MsgBox "No more space for MHE Area Observations"
+            GoTo SkipMheLoopY
+        End If
+        TopObsPos = .Range(MhexObsRow & ":" & MhexObsRow).Top
+        LeftObsPos = .Cells(MhexObsRow, MhexObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            MhexObsCol = MhexObsCol + 1
+            If MhexObsCol >= 126 Then
+                MhexObsCol = 116
+                MhexObsRow = MhexObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If MheLoop = ObservationsNum Then GoTo SkipMheLoopY
+    Next MheLoop
+End With
+SkipMheLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Pl_Obs_ini_Year()
+'Dim PlxObsCol As Long, PlxObsRow As Long, PlLoop As Long
+'Col = 9 - 23
+'Row = 48 - 54
+With sh_Map
+    For PlLoop = 1 To ObservationsNum
+        If PlxObsCol = 0 Then PlxObsCol = 9
+        If PlxObsRow = 0 Then PlxObsRow = 48
+        If PlxObsRow = 55 Then
+            MsgBox "No more space for 3 PL Observations"
+            GoTo SkipPlLoopY
+        End If
+        TopObsPos = .Range(PlxObsRow & ":" & PlxObsRow).Top
+        LeftObsPos = .Cells(PlxObsRow, PlxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            PlxObsCol = PlxObsCol + 1
+            If PlxObsCol >= 24 Then
+                PlxObsCol = 9
+                PlxObsRow = PlxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If PlLoop = ObservationsNum Then GoTo SkipPlLoopY
+    Next PlLoop
+End With
+SkipPlLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Out_Obs_ini_Year()
+'Dim OutxObsCol As Long, OutxObsRow As Long, OutLoop As Long
+'Col = 26 - 64
+'Row = 74 - 79
+With sh_Map
+    For OutLoop = 1 To ObservationsNum
+        If OutxObsCol = 0 Then OutxObsCol = 26
+        If OutxObsRow = 0 Then OutxObsRow = 74
+        If OutxObsRow = 80 Then
+            MsgBox "No more space for Outbound Observations"
+            GoTo SkipOutLoopY
+        End If
+        TopObsPos = .Range(OutxObsRow & ":" & OutxObsRow).Top
+        LeftObsPos = .Cells(OutxObsRow, OutxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            OutxObsCol = OutxObsCol + 1
+            If OutxObsCol >= 65 Then
+                OutxObsCol = 26
+                OutxObsRow = OutxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If OutLoop = ObservationsNum Then GoTo SkipOutLoopY
+    Next OutLoop
+End With
+SkipOutLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub End_Obs_ini_Year()
+'Dim EndxObsCol As Long, EndxObsRow As Long, EndLoop As Long
+'Col = 9 - 23
+'Row = 74 - 79
+With sh_Map
+    For EndLoop = 1 To ObservationsNum
+        If EndxObsCol = 0 Then EndxObsCol = 9
+        If EndxObsRow = 0 Then EndxObsRow = 74
+        If EndxObsRow = 80 Then
+            MsgBox "No more space for End Bays Observations"
+            GoTo SkipEndLoopY
+        End If
+        TopObsPos = .Range(EndxObsRow & ":" & EndxObsRow).Top
+        LeftObsPos = .Cells(EndxObsRow, EndxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            EndxObsCol = EndxObsCol + 1
+            If EndxObsCol >= 24 Then
+                EndxObsCol = 9
+                EndxObsRow = EndxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If EndLoop = ObservationsNum Then GoTo SkipEndLoopY
+    Next EndLoop
+End With
+SkipEndLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Ser_Obs_ini_Year()
+'Dim SerxObsCol As Long, SerxObsRow As Long, SerLoop As Long
+'Col = 129 - 146
+'Row = 25 - 26
+With sh_Map
+    For SerLoop = 1 To ObservationsNum
+        If SerxObsCol = 0 Then SerxObsCol = 129
+        If SerxObsRow = 0 Then SerxObsRow = 25
+        If SerxObsRow = 27 Then
+            MsgBox "No more space for Service Centre Observations"
+            GoTo SkipSerLoopY
+        End If
+        TopObsPos = .Range(SerxObsRow & ":" & SerxObsRow).Top
+        LeftObsPos = .Cells(SerxObsRow, SerxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            SerxObsCol = SerxObsCol + 1
+            If SerxObsCol >= 147 Then
+                SerxObsCol = 129
+                SerxObsRow = SerxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If SerLoop = ObservationsNum Then GoTo SkipSerLoopY
+    Next SerLoop
+End With
+SkipSerLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Yar_Obs_ini_Year()
+'Dim YarxObsCol As Long, YarxObsRow As Long, YarLoop As Long
+'Col = 130 - 149
+'Row = 76 - 79
+With sh_Map
+    For YarLoop = 1 To ObservationsNum
+        If YarxObsCol = 0 Then YarxObsCol = 130
+        If YarxObsRow = 0 Then YarxObsRow = 76
+        If YarxObsRow = 80 Then
+            MsgBox "No more space for Yard Observations"
+            GoTo SkipYarLoopY
+        End If
+        TopObsPos = .Range(YarxObsRow & ":" & YarxObsRow).Top
+        LeftObsPos = .Cells(YarxObsRow, YarxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            YarxObsCol = YarxObsCol + 1
+            If YarxObsCol >= 150 Then
+                YarxObsCol = 130
+                YarxObsRow = YarxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If YarLoop = ObservationsNum Then GoTo SkipYarLoopY
+    Next YarLoop
+End With
+SkipYarLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Rec_Obs_ini_Year()
+'Dim RecxObsCol As Long, RecxObsRow As Long, RecLoop As Long
+'Col = 196 - 209
+'Row = 12 - 15
+With sh_Map
+    For RecLoop = 1 To ObservationsNum
+        If RecxObsCol = 0 Then RecxObsCol = 196
+        If RecxObsRow = 0 Then RecxObsRow = 12
+        If RecxObsRow = 16 Then
+            MsgBox "No more space for Reception Observations"
+            GoTo SkipRecLoopY
+        End If
+        TopObsPos = .Range(RecxObsRow & ":" & RecxObsRow).Top
+        LeftObsPos = .Cells(RecxObsRow, RecxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            RecxObsCol = RecxObsCol + 1
+            If RecxObsCol >= 210 Then
+                RecxObsCol = 196
+                RecxObsRow = RecxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If RecLoop = ObservationsNum Then GoTo SkipRecLoopY
+    Next RecLoop
+End With
+SkipRecLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Sec_Obs_ini_Year()
+'Dim SecxObsCol As Long, SecxObsRow As Long, SecLoop As Long
+'Col = 150 - 163
+'Row = 12 - 15
+With sh_Map
+    For SecLoop = 1 To ObservationsNum
+        If SecxObsCol = 0 Then SecxObsCol = 150
+        If SecxObsRow = 0 Then SecxObsRow = 12
+        If SecxObsRow = 16 Then
+            MsgBox "No more space for Security area Observations"
+            GoTo SkipSecLoopY
+        End If
+        TopObsPos = .Range(SecxObsRow & ":" & SecxObsRow).Top
+        LeftObsPos = .Cells(SecxObsRow, SecxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            SecxObsCol = SecxObsCol + 1
+            If SecxObsCol >= 164 Then
+                SecxObsCol = 150
+                SecxObsRow = SecxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If SecLoop = ObservationsNum Then GoTo SkipSecLoopY
+    Next SecLoop
+End With
+SkipSecLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Sid_Obs_ini_Year()
+'Dim SidxObsCol As Long, SidxObsRow As Long, SidLoop As Long
+'Col = 6 - 7
+'Row = 49 - 67
+With sh_Map
+    For SidLoop = 1 To ObservationsNum
+        If SidxObsCol = 0 Then SidxObsCol = 6
+        If SidxObsRow = 0 Then SidxObsRow = 49
+        If SidxObsRow = 16 Then
+            MsgBox "No more space for Side Racking Observations"
+            GoTo SkipSidLoopY
+        End If
+        TopObsPos = .Range(SidxObsRow & ":" & SidxObsRow).Top
+        LeftObsPos = .Cells(SidxObsRow, SidxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            SidxObsCol = SidxObsCol + 1
+            If SidxObsCol >= 8 Then
+                SidxObsCol = 6
+                SidxObsRow = SidxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If SidLoop = ObservationsNum Then GoTo SkipSidLoopY
+    Next SidLoop
+End With
+SkipSidLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+Sub Loc_Obs_ini_Year()
+'Dim LocxObsCol As Long, LocxObsRow As Long, LocLoop As Long
+'Col = 129 - 142
+'Row = 12 - 15
+With sh_Map
+    For LocLoop = 1 To ObservationsNum
+        If LocxObsCol = 0 Then LocxObsCol = 129
+        If LocxObsRow = 0 Then LocxObsRow = 12
+        If LocxObsRow = 16 Then
+            MsgBox "No more space for Lockers Observations"
+            GoTo SkipLocLoopY
+        End If
+        TopObsPos = .Range(LocxObsRow & ":" & LocxObsRow).Top
+        LeftObsPos = .Cells(LocxObsRow, LocxObsCol).Left
+        sh_Map.Shapes("ButtonMedGr").Duplicate.Name = "ShpObservation" & Format(NewShapeIDNum)
+            With sh_Map.Shapes("ShpObservation" & Format(NewShapeIDNum))
+                .Top = TopObsPos
+                .Left = LeftObsPos
+            LocxObsCol = LocxObsCol + 1
+            If LocxObsCol >= 143 Then
+                LocxObsCol = 129
+                LocxObsRow = LocxObsRow + 1
+            End If
+        NewShapeIDNum = NewShapeIDNum + 1
+        End With
+        If LocLoop = ObservationsNum Then GoTo SkipLocLoopY
+    Next LocLoop
+End With
+SkipLocLoopY:
+MainObsLoop = MainObsLoop + 1
+Call Observations_MainLoop_Year
+End Sub
+
+
+Sub Delete_ObsShapes()
+With sh_Map
+    'Loop through all shapes and then delete them
+    For Each ObsShpObj In .Shapes
+        On Error Resume Next
+            If InStr(ObsShpObj.Name, "ShpObservation") > 0 Then ObsShpObj.Delete
+        'On Error GoTo 0
+    Next ObsShpObj
+Sheet1.Range("C18").Value = 0
+End With
+End Sub
